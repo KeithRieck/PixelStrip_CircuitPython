@@ -40,6 +40,7 @@ class PixelStrip(neopixel.NeoPixel):
         """
         Reset the strip animation.
         """
+        self._prev_time = time.monotonic()
         if self._animation is not None:
             self._animation.reset(self)
     

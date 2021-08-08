@@ -1,6 +1,6 @@
 # PixelStrip_CircuitPython
 
-PixelStrip is a small extension to AdaFruit's [Neopixel library](https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel) for [CircuitPython](https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel).  The PixelStrip library allows you to add Animations to the strip.  Multiple strips can have separate animations that run in parallel.
+PixelStrip is a small extension to AdaFruit's [Neopixel library](https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel) for [CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython).  The PixelStrip library allows you to add Animations to the strip.  Multiple strips can have separate animations that run in parallel.
 
 Animations on a strip can be changed at any time.
 
@@ -12,6 +12,9 @@ import board
 import pixelstrip
 
 class BlinkAnimation(pixelstrip.Animation):
+    def __init__(self):
+        pixelstrip.Animation.__init__(self)
+
     def reset(self, strip):
         self.set_timeout(1.0)
 
@@ -26,11 +29,11 @@ class BlinkAnimation(pixelstrip.Animation):
             strip.show()
 
 
-strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGBW)
-strip.animation = BlinkAnimation()
+strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGBW)
+strip_12.animation = BlinkAnimation()
 
 while True:
-    strip.draw()
+    strip_12.draw()
     time.sleep(0.05)
 ```
 
