@@ -11,21 +11,17 @@ import pixelstrip
 class MyAnimation(pixelstrip.Animation):
     def __init__(self):
         pixelstrip.Animation.__init__(self)
-        self.pixel_state = 0
+        # variable setup
 
     def reset(self, strip):
-        self.pixel_state = 0
-        self.set_timeout(0.5)
+        # reset variables
+        # set timeout if needed
         strip.clear()
+        strip.show()
 
     def draw(self, strip, delta_time):
-        if self.is_timed_out():
-            self.set_timeout(0.5)
-            self.pixel_state = (self.pixel_state + 1) % 3
-            for p in range(strip.n):
-                color = (0, 128, 0, 0) if ((p + self.pixel_state) % 3) == 0 else (0, 0, 0, 0)
-                strip[p] = color
-            strip.show()
+        # change pixel values
+        strip.show()
 
 strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGBW)
 
