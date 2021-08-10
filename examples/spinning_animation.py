@@ -6,16 +6,16 @@ class SpinningAnimation(pixelstrip.Animation):
     """
     One colored pixel travels across the strip.
     """
-    def __init__(self, color, spin_time=1.0):
+    def __init__(self, color, cycle_time=1.0):
         pixelstrip.Animation.__init__(self)
         self.color = color
         self.current_pixel = 0
-        self.spin_time = spin_time
-        self.wait_time = self.spin_time / 8
+        self.cycle_time = cycle_time
+        self.wait_time = self.cycle_time / 8
 
     def reset(self, strip):
         self.current_pixel = 0
-        self.wait_time = self.spin_time / strip.n
+        self.wait_time = self.cycle_time / strip.n
         self.set_timeout(self.wait_time)
 
     def draw(self, strip, delta_time):

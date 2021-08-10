@@ -6,13 +6,20 @@ GRB = "GRB"
 RGBW = "RGBW"
 GRBW = "GRBW"
 
+def current_time():
+    """
+    Returns the current time in seconds.
+    """
+    return time.monotonic()
+
+
 class PixelStrip(neopixel.NeoPixel):
     """
     Subclass of NeoPixel, but supporting Animations.
     """
 
     def __init__(
-        self, pin, n, bpp=3, brightness=1.0, auto_write=False, pixel_order=None
+        self, pin, n, bpp=4, brightness=1.0, auto_write=False, pixel_order=None
     ):
         neopixel.NeoPixel.__init__(
             self,
@@ -24,7 +31,7 @@ class PixelStrip(neopixel.NeoPixel):
             pixel_order=pixel_order,
         )
         self._animation = None
-        self._prev_time = time.monotonic()
+        self._prev_time = current_time()
         self.CLEAR = (0, 0, 0, 0) if bpp == 4 else (0, 0, 0)
 
     def draw(self):
@@ -32,15 +39,15 @@ class PixelStrip(neopixel.NeoPixel):
         Draw one cycle of the strip animation.
         """
         if self._animation is not None:
-            delta_time = time.monotonic() - self._prev_time
+            delta_time = current_time() - self._prev_time
             self._animation.draw(self, delta_time)
-            self._prev_time = time.monotonic()
+            self._prev_time = current_time()
 
     def reset(self):
         """
         Reset the strip animation.
         """
-        self._prev_time = time.monotonic()
+        self._prev_time = current_time()
         if self._animation is not None:
             self._animation.reset(self)
     
@@ -89,7 +96,7 @@ class Animation:
         if t == 0 or t is None:
             self._timeout = None
         else:
-            self._timeout = time.monotonic() + t
+            self._timeout = current_time() + t
     
     def is_timed_out(self):
         """
@@ -98,4 +105,4 @@ class Animation:
         if self._timeout is None:
             return False
         else: 
-            return time.monotonic() >= self._timeout
+            return current_time() >= self._timeout
