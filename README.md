@@ -34,6 +34,6 @@ strip_12.animation = BlinkAnimation()
 
 while True:
     strip_12.draw()
-    time.sleep(0.05)
+    time.sleep(0.02)
 ```
 
