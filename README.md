@@ -61,11 +61,11 @@ class BlinkAnimation(pixelstrip.Animation):
         pixelstrip.Animation.__init__(self)
 
     def reset(self, strip):
-        self.set_timeout(1.0)
+        self.timeout = 1.0
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
-            self.set_timeout(1.0)
+            self.timeout = 1.0
             lights_on = strip[0][0] != 0
             if lights_on:
                 strip.fill((0, 0, 0, 0))

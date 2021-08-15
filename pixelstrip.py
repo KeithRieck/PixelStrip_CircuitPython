@@ -30,6 +30,7 @@ class PixelStrip(neopixel.NeoPixel):
             auto_write=auto_write,
             pixel_order=pixel_order,
         )
+        self._timeout = None
         self._animation = None
         self._prev_time = current_time()
         self.CLEAR = (0, 0, 0, 0) if bpp == 4 else (0, 0, 0)
@@ -67,6 +68,30 @@ class PixelStrip(neopixel.NeoPixel):
         if self._animation is not None:
             self._animation.reset(self)
 
+    @property
+    def timeout(self):
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, t):
+        """
+        Set or reset a timeout (in seconds) on this PixelStrip.
+        Setting with None cancels the timeout.
+        """
+        if t < 0 or t is None:
+            self._timeout = None
+        else:
+            self._timeout = current_time() + t
+    
+    def is_timed_out(self):
+        """
+        Determine if the timeout has been reached.
+        """
+        if self._timeout is None:
+            return False
+        else: 
+            return current_time() >= self._timeout
+
 
 class Animation:
     """
@@ -88,12 +113,17 @@ class Animation:
         """
         pass
     
-    def set_timeout(self, t):
+    @property
+    def timeout(self):
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, t):
         """
-        Set or reset a timeout (in seconds) on this Animation.
+        Set or reset a timeout (in seconds) on this PixelStrip.
         Setting with None cancels the timeout.
         """
-        if t == 0 or t is None:
+        if t < 0 or t is None:
             self._timeout = None
         else:
             self._timeout = current_time() + t

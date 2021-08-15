@@ -16,11 +16,11 @@ class SpinningAnimation(pixelstrip.Animation):
     def reset(self, strip):
         self.current_pixel = 0
         self.wait_time = self.cycle_time / strip.n
-        self.set_timeout(self.wait_time)
+        self.timeout = self.wait_time
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
-            self.set_timeout(self.wait_time)
+            self.timeout = self.wait_time
             self.current_pixel = (self.current_pixel + 1) % strip.n
             strip.clear()
             strip[self.current_pixel] = self.color
