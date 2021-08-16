@@ -26,10 +26,12 @@ class SpinningAnimation(pixelstrip.Animation):
             strip[self.current_pixel] = self.color
             strip.show()
 
-strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGBW)
 
-strip_12.animation = SpinningAnimation((128, 64, 0, 0))
+def main():
+    strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGBW)
+    strip_12.animation = SpinningAnimation((128, 64, 0, 0))
+    while True:
+        strip_12.draw()
+        time.sleep(0.02)
 
-while True:
-    strip_12.draw()
-    time.sleep(0.02)
+main()

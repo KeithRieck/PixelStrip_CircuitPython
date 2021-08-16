@@ -2,8 +2,6 @@
 
 PixelStrip is a small extension to AdaFruit's [Neopixel library](https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel) for [CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython).  The PixelStrip library allows you to add Animations to the strip.  Multiple strips can have separate animations that run in parallel.
 
-This library has been tested with the [Adafruit Feather RP2040](https://www.adafruit.com/product/4884).
-
 ## Installation
 
 First, [download the latest CircuitPython libraries](https://circuitpython.org/libraries).
