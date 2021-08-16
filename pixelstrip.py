@@ -57,6 +57,7 @@ class PixelStrip(neopixel.NeoPixel):
         Turn all pixels off.
         """
         self.fill(self.CLEAR)
+        self.show()
 
     @property
     def animation(self):
