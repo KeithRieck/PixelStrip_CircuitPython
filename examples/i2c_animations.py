@@ -21,20 +21,18 @@ strip = [
     )
 ]
 
-i2c = I2CPeripheral(board.SCL, board.SDA, (I2C_ADDRESS))
-
-
 def receive_message(time=0.02):
-    msg = i2c.request(timeout=time)
-    if msg is None:
-        return None
-    with msg:
-        if msg.is_read:
+    with I2CPeripheral(board.SCL, board.SDA, (I2C_ADDRESS)) as i2c:
+        msg = i2c.request(timeout=time)
+        if msg is None:
             return None
-        buffer = msg.read(-1)
-        strip_num = int(buffer[0])
-        anim_num = int(buffer[1])
-        return (strip_num, anim_num)
+        with msg:
+            if msg.is_read:
+                return None
+            buffer = msg.read(-1)
+            strip_num = int(buffer[0])
+            anim_num = int(buffer[1])
+            return (strip_num, anim_num)
 
 
 # The built-in LED will turn on for half a second after every message
