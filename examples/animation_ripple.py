@@ -3,13 +3,14 @@ import board
 import pixelstrip
 from math import sin, floor, ceil
 
+
 class RippleAnimation(pixelstrip.Animation):
     def __init__(
-            self,
-            color_list=[(0, 0, 0, 0), (255, 0, 0, 0), (128, 128, 0, 0), (0, 0, 0, 0)],
-            curve_list=[(0.125, 1.0, 1.0), (0.156, 0.8, 0.9), (0.100, 1.1, 1.1)],
-            cycle_time=0.0,
-            x_span=100,
+        self,
+        color_list=[(0, 0, 0, 0), (255, 0, 0, 0), (128, 128, 0, 0), (0, 0, 0, 0)],
+        curve_list=[(0.125, 1.0, 1.0), (0.156, 0.8, 0.9), (0.100, 1.1, 1.1)],
+        cycle_time=40.0,
+        x_span=100,
     ):
         pixelstrip.Animation.__init__(self)
         self.color_list = color_list
@@ -28,8 +29,8 @@ class RippleAnimation(pixelstrip.Animation):
             for curve in self.curve_list:
                 c = c + self.g(p, m, curve[0], curve[1], curve[2])
             c = c / len(self.curve_list)
-            c = min(max(((c + 0.88) / 1.61), 0.0), 1.0)
-            # c = min(max(((c + 1.0) / 2.0), 0.0), 1.0)
+            c = min(max(c, 0.0), 1.0)
+            strip[p] = self.shift_color(c)
         strip.show()
 
     def f(self, x, t, w):
