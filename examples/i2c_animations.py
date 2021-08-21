@@ -2,7 +2,7 @@ import board
 import pixelstrip
 import digitalio
 from animation_pulse import PulseAnimation
-from i2cperipheral import I2CPeripheral
+import busio
 
 I2C_ADDRESS = 4
 BRIGHTNESS = 0.5
@@ -22,17 +22,18 @@ strip = [
 ]
 
 def receive_message(time=0.02):
-    with I2CPeripheral(board.SCL, board.SDA, (I2C_ADDRESS)) as i2c:
-        msg = i2c.request(timeout=time)
-        if msg is None:
+    with busio.I2C(scl=board.SCL, sda=board.SDA) as i2c:
+        if i2c.try_lock():
+            try:
+                buffer = bytearray(2)
+                i2c.readfrom_into(1, buffer)
+                strip_num = int(buffer[0])
+                anim_num = int(buffer[1])
+                return (strip_num, anim_num)
+            finally:
+                i2c.unlock()
+        else:
             return None
-        with msg:
-            if msg.is_read:
-                return None
-            buffer = msg.read(-1)
-            strip_num = int(buffer[0])
-            anim_num = int(buffer[1])
-            return (strip_num, anim_num)
 
 
 # The built-in LED will turn on for half a second after every message
