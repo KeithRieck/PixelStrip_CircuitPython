@@ -5,6 +5,9 @@ from math import sin, floor, ceil
 
 
 class RippleAnimation(pixelstrip.Animation):
+    """
+    Pixels fade in and out of color, based on the sum of sine curves.
+    """
     def __init__(
         self,
         color_list=[(0, 0, 0, 0), (255, 0, 0, 0), (128, 128, 0, 0), (0, 0, 0, 0)],

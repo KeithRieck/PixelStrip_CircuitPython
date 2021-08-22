@@ -4,6 +4,11 @@ import pixelstrip
 from math import sin, floor
 
 class PulseAnimation(pixelstrip.Animation):
+    """
+    Pixels are colored alternattely based on a color_list.
+    Then, the different colors are pulsed bright to dark, each color
+    slightly out of sequence.
+    """
     def __init__(self, color_list=[(136, 0, 0, 0), (64, 64, 0, 0)], cycle_time=2.0):
         pixelstrip.Animation.__init__(self)
         self.color_list = color_list

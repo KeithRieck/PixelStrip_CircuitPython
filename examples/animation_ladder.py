@@ -3,21 +3,26 @@ import board
 import pixelstrip
 
 class LadderAnimation(pixelstrip.Animation):
-    def __init__(self):
+    """
+    Every third pixel is colored.  The pixels travel down the strip.
+    """
+    def __init__(self, color=(0, 128, 0, 0), cycle_time=0.5):
         pixelstrip.Animation.__init__(self)
+        self.color = color
+        self.cycle_time = cycle_time
         self.pixel_state = 0
 
     def reset(self, strip):
         self.pixel_state = 0
-        self.timeout = 0.5
+        self.timeout = self.cycle_time
         strip.clear()
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
-            self.timeout = 0.5
+            self.timeout = self.cycle_time
             self.pixel_state = (self.pixel_state + 1) % 3
             for p in range(strip.n):
-                color = (0, 128, 0, 0) if ((p + self.pixel_state) % 3) == 0 else (0, 0, 0, 0)
+                color = self.color if ((p + self.pixel_state) % 3) == 0 else (0, 0, 0, 0)
                 strip[p] = color
             strip.show()
 
