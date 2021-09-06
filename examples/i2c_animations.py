@@ -1,4 +1,4 @@
-import board
+import digitalio
 from i2cp import i2cSlave
 from pixelstrip import PixelStrip, current_time
 from animation_pulse import PulseAnimation
@@ -24,8 +24,8 @@ strip = [
 ]
 
 # The built-in LED will turn on for half a second after every message
-led = Pin(25, Pin.OUT)
-led.value(False)
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
 
 i2c_slave = i2cSlave(0,sda=16,scl=17,slave_address=I2C_ADDRESS)
 
@@ -53,6 +53,6 @@ def main():
             anim_num = message[1]
             strip[strip_num].animation = animation[anim_num]
             last_msg_time = current_time()
-        led.value(current_time() < last_msg_time + 0.5)
+        led.value = (current_time() < last_msg_time + 0.5)
 
 main()

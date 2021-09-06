@@ -2,12 +2,16 @@
 
 PixelStrip is a small extension to AdaFruit's [Neopixel library](https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel) for [CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython).  The PixelStrip library allows you to add Animations to the strip.  Multiple strips can have separate animations that run in parallel.
 
+This code has been tested on the [Adafruit Feather RP2040](https://learn.adafruit.com/adafruit-feather-rp2040-pico).
+
 ## Installation
 
 First, [download the latest CircuitPython libraries](https://circuitpython.org/libraries).
 This package will contain the latest `neopixel.mpy` library, and others.
 
 Second, [install the latest version of CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython/installing-circuitpython) onto your device.  Your device will then appear as a USB drive on your computer named CIRCUITPY.  The drive will have a `lib` directory and the default program named `code.py`.
+
+On your laptop, download either the [Mu](https://codewith.mu/) editor or [Visual Studio Code](https://code.visualstudio.com/) with the [CircuitPython](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython) extension.  Most of the CircuitPython tutorials use Mu, which is a good choice.  I choose to work mostly with Visual Studio Code, since that editor is supported by FIRST robotics.
 
 Now, copy the following libaries into the `lib` directory:
 * `neopixel.mpy`
@@ -16,9 +20,32 @@ Now, copy the following libaries into the `lib` directory:
 
 Edit the `code.py` to execute PixelStrip animations.
 
-## Simple Example
+## Trivial Example - Blinking the onboard LED
+
+The Pico board has a tiny LED near the USB plug, which we can cause to blink.  Save the following code into your Pico with the file name `code.py`:
+
+```python
+import time
+import board
+import digitalio
+
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
+
+while True:
+    led.value = True
+    time.sleep(0.5)
+    led.value = False
+    time.sleep(0.5)
+```
+
+This blink program is very useful because it verifies that the basic hardware and software is working.  If you ever reach a point there the board isn't doing anything, you can always load in the blink program to verify that your hardware is wired and powered, that your IDE is working and files are being delivered through USB.
+
+## Simple Example - Blinking a NeoPixel
 
 Wire up your Neopixels (WS2812B LEDs) for 5 volts, the ground, and digital input connecting  to one of the board's GPIO pins (pin 12 in the following examples).
+
+![PixelStrip setup](pixelstrip_setup.png)
 
 In code, create a PixelStrip object and assign colors to specific LEDs. Colors are coded as tuples of four integers, each between 0 and 255.
 
