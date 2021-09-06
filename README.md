@@ -22,7 +22,7 @@ Edit the `code.py` to execute PixelStrip animations.
 
 ## Trivial Example - Blinking the onboard LED
 
-The Pico board has a tiny LED near the USB plug, which we can cause to blink.  Save the following code into your Pico with the file name `code.py`:
+The Feather RP2040 board has a tiny LED near the USB plug, which we can cause to blink.  Save the following code into your board with the file name `code.py`:
 
 ```python
 import time
@@ -40,6 +40,25 @@ while True:
 ```
 
 This blink program is very useful because it verifies that the basic hardware and software is working.  If you ever reach a point there the board isn't doing anything, you can always load in the blink program to verify that your hardware is wired and powered, that your IDE is working and files are being delivered through USB.
+
+## Another Trivial Example - Blinking the onboard NeoPixel
+
+The Feather board has a single NeoPixel near the reset button.  Save the following code into your Feather with the file name `code.py`:
+
+```python
+import time
+import board
+import neopixel
+
+pixel = neopixel.NeoPixel(board.NEOPIXEL, 1, brightness=0.3)
+color = (0, 128, 128)
+
+while True:
+    pixel.fill(color)
+    time.sleep(0.5)
+    pixel.fill((0, 0, 0))
+    time.sleep(0.5)
+```
 
 ## Simple Example - Blinking a NeoPixel
 

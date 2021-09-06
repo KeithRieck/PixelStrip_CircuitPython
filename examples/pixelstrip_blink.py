@@ -1,11 +1,12 @@
 import time
 import board
-import pixelstrip
+import neopixel
 
-strip = pixelstrip.PixelStrip(board.D12, 8, auto_write=True)
+pixel = neopixel.NeoPixel(board.NEOPIXEL, 1, brightness=0.3)
+color = (0, 128, 128)
 
 while True:
-    strip[0] = (128, 0, 0, 0)
-    time.sleep(0.5)
-    strip[0] = (0, 0, 0, 0)
+    lights_on = pixel[0][0] + pixel[0][1] + pixel[0][2] > 0
+    next_color = (0, 0, 0) if lights_on else color
+    pixel.fill(next_color)
     time.sleep(0.5)
