@@ -7,9 +7,7 @@ PixelStrip is a small extension to AdaFruit's [Neopixel library](https://github.
 First, [download the latest CircuitPython libraries](https://circuitpython.org/libraries).
 This package will contain the latest `neopixel.mpy` library, and others.
 
-Second, [install the latest version of CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython/installing-circuitpython) onto your device.  Your device
-will then appear as a USB drive on your computer named CIRCUITPY.  The drive will have 
-a `lib` directory and the default program named `code.py`.
+Second, [install the latest version of CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython/installing-circuitpython) onto your device.  Your device will then appear as a USB drive on your computer named CIRCUITPY.  The drive will have a `lib` directory and the default program named `code.py`.
 
 Now, copy the following libaries into the `lib` directory:
 * `neopixel.mpy`
@@ -20,11 +18,9 @@ Edit the `code.py` to execute PixelStrip animations.
 
 ## Simple Example
 
-Wire up your Neopixels (WS2812B LEDs) for 5 volts, the ground, and digital input connecting 
-to one of the board's GPIO pins (pin 12 in the following examples).
+Wire up your Neopixels (WS2812B LEDs) for 5 volts, the ground, and digital input connecting  to one of the board's GPIO pins (pin 12 in the following examples).
 
-In code, create a PixelStrip object and assign colors to specific LEDs. Colors are coded
-as tuples of four integers, each between 0 and 255.
+In code, create a PixelStrip object and assign colors to specific LEDs. Colors are coded as tuples of four integers, each between 0 and 255.
 
 ```python
 import time

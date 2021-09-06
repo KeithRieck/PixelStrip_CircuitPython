@@ -51,7 +51,7 @@ class PixelStrip(neopixel.NeoPixel):
         self._prev_time = current_time()
         if self._animation is not None:
             self._animation.reset(self)
-    
+
     def clear(self):
         """
         Turn all pixels off.
@@ -83,14 +83,14 @@ class PixelStrip(neopixel.NeoPixel):
             self._timeout = None
         else:
             self._timeout = current_time() + t
-    
+
     def is_timed_out(self):
         """
         Determine if the timeout has been reached.
         """
         if self._timeout is None:
             return False
-        else: 
+        else:
             return current_time() >= self._timeout
 
 
@@ -113,7 +113,7 @@ class Animation:
         The delta_time is the number of seconds since the last draw call.
         """
         pass
-    
+
     @property
     def timeout(self):
         return self._timeout
@@ -128,12 +128,12 @@ class Animation:
             self._timeout = None
         else:
             self._timeout = current_time() + t
-    
+
     def is_timed_out(self):
         """
         Determine if the timeout has been reached.
         """
         if self._timeout is None:
             return False
-        else: 
+        else:
             return current_time() >= self._timeout
