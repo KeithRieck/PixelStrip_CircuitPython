@@ -11,7 +11,7 @@ First, install the latest version of CircuitPython, [downloading a UF2 file spec
 Second, [download the latest CircuitPython libraries](https://circuitpython.org/libraries).
 This package will contain the latest `neopixel.mpy` library, and others.
 
-On your laptop, download [Visual Studio Code](https://code.visualstudio.com/) with the [CircuitPython](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython) extension.  Most of the CircuitPython tutorials use [Mu](https://codewith.mu/), which is a good choice.  I choose to work mostly with Visual Studio Code, since that editor is supported by FIRST robotics.
+On your laptop, download [Visual Studio Code](https://code.visualstudio.com/) with the [CircuitPython](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython) extension.  Most of the CircuitPython tutorials use the [Mu](https://codewith.mu/) editor, which is a good choice.  I choose to work mostly with Visual Studio Code, since VSC is supported by [FIRST](https://www.firstinspires.org/) robotics.
 
 Now, copy the following libaries into the `lib` directory:
 * `neopixel.mpy`
@@ -80,9 +80,9 @@ strip = pixelstrip.PixelStrip(board.D12, 8, auto_write=True)
 
 # Assign color values to individual LEDs
 while True:
-    strip[0] = (128, 0, 0, 0)
+    strip[0] = (128, 0, 0)
     sleep(0.5)
-    strip[0] = (0, 0, 0, 0)
+    strip[0] = (0, 0, 0)
     sleep(0.5)
 ```
 
@@ -93,7 +93,6 @@ Animations on a strip can be changed at any time.
 New animations should extend `pixelstrip.Animation` and must at least define a new `draw()` function.
 
 ```python
-from time import sleep
 import board
 import pixelstrip
 
@@ -110,13 +109,13 @@ class BlinkAnimation(pixelstrip.Animation):
             self.timeout = 1.0
             lights_on = strip[0][0] != 0
             if lights_on:
-                strip.fill((0, 0, 0, 0))
+                strip.fill((0, 0, 0))
             else:
-                strip[0] = (128, 0, 0, 0)
+                strip[0] = (128, 0, 0)
             strip.show()
 
 # Create a PixelStrip object connected to digital IO pin 12
-strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGBW)
+strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
 
 # Assign an instance of the new Animation into the strip
 strip_12.animation = BlinkAnimation()
@@ -124,6 +123,9 @@ strip_12.animation = BlinkAnimation()
 # Repeatedly draw the strip, causing the Animation to run
 while True:
     strip_12.draw()
-    sleep(0.02)
 ```
 
+> Note that the `PixelStrip` constructor contains special arguments for `bpp` and `pixel_order`.
+> Depending on the WS2812B pixels you purchase, you might need to tweak these values.
+> The `bpp` parameter determines "bytes per pixel" and should almost always be 4. The `pixel_order` parameter determines the order in which colors are addressed.
+> The most common pixel orders are `pixel_order=RGBW` if your pixels have a "white" channel or `pixel_order=RGB` if there is no extra channel.

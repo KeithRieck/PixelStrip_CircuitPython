@@ -4,7 +4,7 @@ PixelStrip is a [CircuitPython](https://circuitpython.org/) module for controlli
 
 Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use GP4 for digital input.
 
-![pixelstrip_setup](./img/pixelstrip_setup_50.jpg)
+![pixelstrip_setup](./img/pixelstrip_setup_bb.png)
 
 Copy the `pixelstrip.py`, and `colors.py` files into your Feather.  Then create the following in a file named `main.py`:
 
@@ -13,7 +13,7 @@ from utime import sleep
 from pixelstrip import PixelStrip
 from colors import *
 
-strip = PixelStrip(4, 8)
+strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.RGB)
 
 while True:
     strip[0] = (0, 64, 64)
@@ -32,7 +32,7 @@ Here's a program that uses a loop to set multiple pixels:
 from utime import sleep
 from pixelstrip import PixelStrip
 
-strip = PixelStrip(4, 8)
+strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.RGB)
 
 while True:
     r = 128
@@ -55,7 +55,7 @@ Here is a program that uses a 'timeout' on the PixelStrip.
 from pixelstrip import PixelStrip
 from random import randint
 
-strip = PixelStrip(4, 8)
+strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.RGB)
 strip.timeout = 1.0
 
 while True:

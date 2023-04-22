@@ -2,7 +2,7 @@
 
 Microcontrollers are miniature computers for use with electronics.  We will be programming the [Adafruit Feather RP2040](https://www.adafruit.com/product/4884) with the [CircuitPython](https://circuitpython.org/) language, which is an implementation of [Python 3](https://www.python.org/) for microcontrollers.  This is a powerful language in its own right, but skills developed in Python will be applicable to programming in [Java](https://en.wikipedia.org/wiki/Java_(programming_language)), [C](https://en.wikipedia.org/wiki/C_(programming_language)), or other languages.
 
-![Raspberry Pi Pico](./img/rpi_pico_pinouts_bw.png)
+![Feather RP2040](./img/feather_rp2040.jpeg)
 
 You will need a Feather RP2040, a USB C cable, and a laptop. Install the [Visual Studio Code](https://code.visualstudio.com/) application.  Within Visual Studio Code (VSC), add the [CircuitPython plugin](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython).
 
@@ -15,31 +15,39 @@ The Feather will appear as a new flash disk called CIRCUITPY.  If you edit files
 In the main window, type the following:
 
 ```python
-from machine import Pin
-from utime import sleep
-led = Pin(25, Pin.OUT)
+from time import sleep
+import board
+import digitalio
+
+led = digitalio.DigitalInOut(board.LED)
+led.direction = digitalio.Direction.OUTPUT
+
 while True:
-    led.on()
+    led.value = True
     sleep(0.5)
-    led.off()
-    sleep(2.0)
+    led.value = False
+    sleep(0.5)
 ```
 
-Save this program onto your Raspberry Pi Pico with the file name `main.py`, and then click the little green "Run" icon.  A small LED on the Pico should start blinking.  You can start and stop the program.  Modify the program to blink at different rates.
+Save this program onto your Feather with the file name `main.py`, and then click the little green "Run" icon.  A small LED on the Feather should start blinking.  You can start and stop the program.  Modify the program to blink at different rates.
 
-![led_setup](./img/led_setup_50.png)
+![led_setup](./img/led_setup_bb.png)
 
 Now try setting up this circuit on your breadboard.  The resistor can be any size, and should be connected to GPIO pin 16.  Note that the LED has a long wire and a short wire; the short wire should connect to the blue ground rail and the long wire should be connected near the resistor. (The long wire is called the Annode, while the short wire is called the Cathode.) Next, try adding more LEDs
 
 ```python
-from machine import Pin
-from utime import sleep
+from time import sleep
+import board
+import digitalio
 
-pin_16 = Pin(16, Pin.OUT)
+pin_12 = digitalio.DigitalInOut(board.D12)
+pin_12.direction = digitalio.Direction.OUTPUT
+toggle = True
 
 while True:
-    pin_16.toggle()
+    pin_12.value = toggle
     sleep(1.0)
+    toggle = not toggle
 ```
 
 ---
@@ -49,11 +57,6 @@ while True:
 * Code a traffic light
 
 ## References:
-* MicroPython on the Pico:  https://www.raspberrypi.com/documentation/microcontrollers/micropython.html
-* Latest MicroPyton UFC for the [Pico](https://datasheets.raspberrypi.com/pico/pico-datasheet.pdf): https://micropython.org/download/rp2-pico/rp2-pico-latest.uf2
-* Latest MicroPyton UFC for the [Pico W](https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf): https://micropython.org/download/rp2-pico-w/rp2-pico-w-latest.uf2
-* UFC to reset everything: https://cdn-learn.adafruit.com/assets/assets/000/099/419/original/flash_nuke.uf2
-* Raspberry Pi Pico Pinout diagram:  https://datasheets.raspberrypi.com/pico/Pico-R3-A4-Pinout.pdf 
+* Feather RP2040 documentation:  https://learn.adafruit.com/adafruit-feather-rp2040-pico
+* Feather RP2040 Pinout diagram:  https://cdn-learn.adafruit.com/assets/assets/000/100/740/medium800/adafruit_products_RP2040Pinout300DPI.png
 
-## Pinouts:
-![Pinouts](./img/rpi_pico_pinouts.jpg)
