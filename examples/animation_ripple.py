@@ -1,4 +1,3 @@
-import time
 import board
 import pixelstrip
 from math import sin, floor, ceil
@@ -64,7 +63,6 @@ def main():
     strip_12.animation = RippleAnimation(x_span=8)
     while True:
         strip_12.draw()
-        time.sleep(0.02)
 
 
 main()

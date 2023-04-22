@@ -6,26 +6,26 @@ This code has been tested on the [Adafruit Feather RP2040](https://learn.adafrui
 
 ## Installation
 
-First, [download the latest CircuitPython libraries](https://circuitpython.org/libraries).
+First, install the latest version of CircuitPython, [downloading a UF2 file specific for your device](https://learn.adafruit.com/welcome-to-circuitpython/installing-circuitpython).  Your device will then appear as a USB drive on your computer named CIRCUITPY.  The drive will have a `lib` directory and the default program named `main.py`.
+
+Second, [download the latest CircuitPython libraries](https://circuitpython.org/libraries).
 This package will contain the latest `neopixel.mpy` library, and others.
 
-Second, [install the latest version of CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython/installing-circuitpython) onto your device.  Your device will then appear as a USB drive on your computer named CIRCUITPY.  The drive will have a `lib` directory and the default program named `code.py`.
-
-On your laptop, download either the [Mu](https://codewith.mu/) editor or [Visual Studio Code](https://code.visualstudio.com/) with the [CircuitPython](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython) extension.  Most of the CircuitPython tutorials use Mu, which is a good choice.  I choose to work mostly with Visual Studio Code, since that editor is supported by FIRST robotics.
+On your laptop, download [Visual Studio Code](https://code.visualstudio.com/) with the [CircuitPython](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython) extension.  Most of the CircuitPython tutorials use [Mu](https://codewith.mu/), which is a good choice.  I choose to work mostly with Visual Studio Code, since that editor is supported by FIRST robotics.
 
 Now, copy the following libaries into the `lib` directory:
 * `neopixel.mpy`
 * `adafruit_pixelbuf.mpy`
 * `pixelstrip.mpy`
 
-Edit the `code.py` to execute PixelStrip animations.
+You can now experiment with CircuitPython programs by editing the `main.py` file on the CIRCUITPY drive.
 
 ## Trivial Example - Blinking the onboard LED
 
 The Feather RP2040 board has a tiny LED near the USB plug, which we can cause to blink.  Save the following code into your board with the file name `code.py`:
 
 ```python
-import time
+from time import sleep
 import board
 import digitalio
 
@@ -34,9 +34,9 @@ led.direction = digitalio.Direction.OUTPUT
 
 while True:
     led.value = True
-    time.sleep(0.5)
+    sleep(0.5)
     led.value = False
-    time.sleep(0.5)
+    sleep(0.5)
 ```
 
 This blink program is very useful because it verifies that the basic hardware and software is working.  If you ever reach a point there the board isn't doing anything, you can always load in the blink program to verify that your hardware is wired and powered, that your IDE is working and files are being delivered through USB.
@@ -46,7 +46,7 @@ This blink program is very useful because it verifies that the basic hardware an
 The Feather board has a single NeoPixel near the reset button.  Save the following code into your Feather with the file name `code.py`:
 
 ```python
-import time
+from time import sleep
 import board
 import neopixel
 
@@ -55,12 +55,14 @@ color = (0, 128, 128)
 
 while True:
     pixel.fill(color)
-    time.sleep(0.5)
+    sleep(0.5)
     pixel.fill((0, 0, 0))
-    time.sleep(0.5)
+    sleep(0.5)
 ```
 
-## Simple Example - Blinking a NeoPixel
+You can use the onboard LED and NeoPixel for testing and debugging.  For instance, you might blink the LED every time you receive an I2C signal, so you will know that the signals are getting through.  You might change the NeoPixel color to reflect a sensor value, so you will know that the sensor is working.
+
+## Simple Example - Blinking a NeoPixel Strip
 
 Wire up your Neopixels (WS2812B LEDs) for 5 volts, the ground, and digital input connecting  to one of the board's GPIO pins (pin 12 in the following examples).
 
@@ -69,7 +71,7 @@ Wire up your Neopixels (WS2812B LEDs) for 5 volts, the ground, and digital input
 In code, create a PixelStrip object and assign colors to specific LEDs. Colors are coded as tuples of four integers, each between 0 and 255.
 
 ```python
-import time
+from time import sleep
 import board
 import pixelstrip
 
@@ -79,9 +81,9 @@ strip = pixelstrip.PixelStrip(board.D12, 8, auto_write=True)
 # Assign color values to individual LEDs
 while True:
     strip[0] = (128, 0, 0, 0)
-    time.sleep(0.5)
+    sleep(0.5)
     strip[0] = (0, 0, 0, 0)
-    time.sleep(0.5)
+    sleep(0.5)
 ```
 
 ## Animation Example
@@ -91,7 +93,7 @@ Animations on a strip can be changed at any time.
 New animations should extend `pixelstrip.Animation` and must at least define a new `draw()` function.
 
 ```python
-import time
+from time import sleep
 import board
 import pixelstrip
 
@@ -122,6 +124,6 @@ strip_12.animation = BlinkAnimation()
 # Repeatedly draw the strip, causing the Animation to run
 while True:
     strip_12.draw()
-    time.sleep(0.02)
+    sleep(0.02)
 ```
 

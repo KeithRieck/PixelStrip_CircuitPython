@@ -1,4 +1,4 @@
-import time
+from time import sleep
 import board
 import neopixel
 
@@ -9,4 +9,4 @@ while True:
     lights_on = pixel[0][0] + pixel[0][1] + pixel[0][2] > 0
     next_color = (0, 0, 0) if lights_on else color
     pixel.fill(next_color)
-    time.sleep(0.5)
+    sleep(0.5)

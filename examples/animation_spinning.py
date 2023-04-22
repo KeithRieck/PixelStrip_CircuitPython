@@ -1,4 +1,3 @@
-import time
 import board
 import pixelstrip
 
@@ -32,6 +31,5 @@ def main():
     strip_12.animation = SpinningAnimation((128, 64, 0, 0))
     while True:
         strip_12.draw()
-        time.sleep(0.02)
 
 main()

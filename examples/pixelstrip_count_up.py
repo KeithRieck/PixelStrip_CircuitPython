@@ -1,4 +1,3 @@
-import time
 import board
 import pixelstrip
 
@@ -16,4 +15,3 @@ while True:
             strip[p] = (64, 64, 0, 0)
         current_pixel = (current_pixel % strip.n) + 1
         strip.show()
-    time.sleep(0.02)

@@ -1,11 +1,10 @@
-import time
 import board
 import pixelstrip
 from math import sin, floor
 
 class PulseAnimation(pixelstrip.Animation):
     """
-    Pixels are colored alternattely based on a color_list.
+    Pixels are colored alternately based on a color_list.
     Then, the different colors are pulsed bright to dark, each color
     slightly out of sequence.
     """
@@ -47,6 +46,5 @@ def main():
     strip_12.animation = PulseAnimation()
     while True:
         strip_12.draw()
-        time.sleep(0.02)
 
 main()

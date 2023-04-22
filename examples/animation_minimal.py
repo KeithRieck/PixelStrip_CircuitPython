@@ -1,4 +1,3 @@
-import time
 import board
 import pixelstrip
 
@@ -29,6 +28,5 @@ def main():
     strip_12.animation = MyAnimation()
     while True:
         strip_12.draw()
-        time.sleep(0.02)
 
 main()
