@@ -10,8 +10,9 @@ Here's a simple matrix program:
 
 ```python
 import pixelstrip
+import board
 
-matrix = pixelstrip.PixelStrip(4, width=8, height=8)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.RGB)
 matrix.timeout = 0.0
 i = 0
 
@@ -29,8 +30,9 @@ You can break a complex program into smaller functions:
 ```python
 from colors import *
 import pixelstrip
+import board
 
-matrix = pixelstrip.PixelStrip(4, width=8, height=8)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.RGB)
 matrix.timeout = 0.0
 r = 0
 
@@ -52,9 +54,10 @@ Here's another function for drawing:
 ```python
 from colors import *
 import pixelstrip
+import board
 from random import randint
 
-matrix = pixelstrip.PixelStrip(4, width=8, height=8)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.RGB)
 matrix.timeout = 0.0
 
 def draw_box(m, row, col, color):

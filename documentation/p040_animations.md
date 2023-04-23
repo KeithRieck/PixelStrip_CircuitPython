@@ -9,6 +9,7 @@ For each animation type, you must define an Animation `class`.  The class then a
 ```Python
 from colors import *
 from pixelstrip import PixelStrip, Animation
+import board
 
 # Define a new Animation
 class BlinkAnimation(Animation):
@@ -29,7 +30,7 @@ class BlinkAnimation(Animation):
             self.timeout = 1.0
 
 # Create a PixelStrip object connected to digital IO pin GP4
-strip = PixelStrip(4, 8)
+strip = PixelStrip(board.D12, 24, bpp=4, pixel_order="RGB")
 
 # Assign an instance of the new Animation into the strip
 strip.animation = BlinkAnimation()
@@ -44,6 +45,7 @@ Here is another animation.  Note that this animation uses a local variable `p` t
 ```Python
 from colors import *
 from pixelstrip import PixelStrip, Animation
+import board
 
 class SparkAnimation(Animation):
     def __init__(self):
@@ -63,7 +65,7 @@ class SparkAnimation(Animation):
             self.p = (self.p + 1) % strip.n
             self.timeout = 0.3
 
-strip = PixelStrip(4, 24)
+strip = PixelStrip(board.D12, 24, bpp=4, pixel_order="RGB")
 strip.wrap = True
 strip.animation = SparkAnimation()
 

@@ -3,10 +3,11 @@
 Here is code defines a subroutine to draw a spark, which moves across the strip.
 
 ```python
-from pixelstrip import PixelStrip
+import pixelstrip
+import board
 from colors import *
 
-strip = PixelStrip(4, 8)
+strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
 strip.wrap = True
 strip.timeout = 0.0
 
@@ -30,10 +31,11 @@ Try changing the spark drawing subroutine.  Try causing two or three sparks to m
 Here is code that makes one pixel move back and forth.:
 
 ```python
-from pixelstrip import PixelStrip
+import pixelstrip
+import board
 from colors import *
 
-strip = PixelStrip(4, 8)
+strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
 strip.timeout = 0.0
 c = GREEN
 p = 0
@@ -60,10 +62,11 @@ Change the above code so the pixel changes colors every time it bounces off the 
 This code defines a function that generates new colors that are midway between two other colors:
 
 ```python
-from pixelstrip import PixelStrip
+import pixelstrip
+import board
 from colors import *
 
-strip = PixelStrip(4, 8)
+strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
 strip.wrap = True
 strip.timeout = 0.0
 
