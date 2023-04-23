@@ -6,13 +6,13 @@ Microcontrollers are miniature computers for use with electronics.  We will be p
 
 You will need a Feather RP2040, a USB C cable, and a laptop. Install the [Visual Studio Code](https://code.visualstudio.com/) application.  Within Visual Studio Code (VSC), add the [CircuitPython plugin](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython).
 
-To set up your Feather, you'll need to get the UF2 file containing the [latest version of CircuitPython](https://circuitpython.org/board/adafruit_feather_rp2040/).  Connect the micro USB cable to you Feather. Hold down the BOOTSEL button on the Pico before connecting the cable to your laptop.  A new drive should appear on the laptop.  Drag the UFC file onto the new drive.  After the file has loaded, unplug the cable from your laptop and then replug it.
+To set up your microcontroller, you'll need to get the UF2 file containing the [latest version of CircuitPython](https://circuitpython.org/board/adafruit_feather_rp2040/) specific for your board.  Connect the USB cable to your board. Hold down the BOOTSEL button before connecting the cable to your laptop.  A new drive should appear on the laptop.  Drag the UFC file onto the new drive.  After the file has loaded, unplug the cable from your laptop and then replug it.
 
-The Feather will appear as a new flash disk called CIRCUITPY.  If you edit files on this volume, they will immedietly start executing under CircuitPython.  You can restart the code at any time by clicking the "Reset" button on the Feather.
+The microcontroller will appear as a new flash disk called CIRCUITPY.  If you edit files on this volume, they will immedietly start executing under CircuitPython.  On a Feather board you can restart the code at any time by clicking the "Reset" button.
 
 ## Blink Code
 
-In the main window, type the following:
+In the main editor window, type the following and save with the file name `main.py`:
 
 ```python
 from time import sleep
@@ -29,7 +29,7 @@ while True:
     sleep(0.5)
 ```
 
-Save this program onto your Feather with the file name `main.py`, and then click the little green "Run" icon.  A small LED on the Feather should start blinking.  You can start and stop the program.  Modify the program to blink at different rates.
+Once saved, the program should start executing and a small LED on the board should start blinking.  You can start and stop the program.  Modify the program to blink at different rates.
 
 ![led_setup](./img/led_setup_bb.png)
 

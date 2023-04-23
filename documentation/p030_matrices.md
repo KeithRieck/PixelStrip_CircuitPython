@@ -4,7 +4,7 @@ We can do a lot of impressive animations with strips of WS2812B LEDs.  We can al
 
 ![matrix_setup](./img/matrix_setup_bb.png)
 
-Wiring a matrix is the same as a pixel strip.  You'll need the same two support files loaded onto your Feather: `pixelstrip.py`, and `colors.py`.  When creating a Python object to represent the matrix, you'll specify `height` and `width` parameters. You may also need to an `option` parameter, depending on how the matrix is wired and how it is positioned.  Individual pixels are addrssed by row and column.
+Wiring a matrix is the same as a pixel strip.  You'll need the same two support files loaded onto your microcontroller: `pixelstrip.py`, and `colors.py`.  When creating a Python object to represent the matrix, you'll specify `height` and `width` parameters. You may also need to an `option` parameter, depending on how the matrix is wired and how it is positioned.  Individual pixels are addrssed by row and column.
 
 Here's a simple matrix program:
 

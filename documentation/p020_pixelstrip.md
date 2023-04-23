@@ -6,7 +6,7 @@ Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In th
 
 ![pixelstrip_setup](./img/pixelstrip_setup_bb.png)
 
-Copy the `pixelstrip.py`, and `colors.py` files into your Feather.  Then create the following in a file named `main.py`:
+Copy the `pixelstrip.py`, and `colors.py` files into your board.  Then create the following in a file named `main.py`:
 
 ```python
 from utime import sleep
