@@ -12,7 +12,7 @@ Here's a simple matrix program:
 import pixelstrip
 import board
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.RGB)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 matrix.timeout = 0.0
 i = 0
 
@@ -32,7 +32,7 @@ from colors import *
 import pixelstrip
 import board
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.RGB)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 matrix.timeout = 0.0
 r = 0
 
@@ -57,7 +57,7 @@ import pixelstrip
 import board
 from random import randint
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.RGB)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 matrix.timeout = 0.0
 
 def draw_box(m, row, col, color):

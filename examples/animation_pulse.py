@@ -42,7 +42,7 @@ class PulseAnimation(pixelstrip.Animation):
         )
 
 def main():
-    strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
+    strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
     strip_12.animation = PulseAnimation()
     while True:
         strip_12.draw()
