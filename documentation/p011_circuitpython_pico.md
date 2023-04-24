@@ -40,15 +40,18 @@ from time import sleep
 import board
 import digitalio
 
-pin_12 = digitalio.DigitalInOut(board.D12)
-pin_12.direction = digitalio.Direction.OUTPUT
+pin_15 = digitalio.DigitalInOut(board.GP15)
+pin_15.direction = digitalio.Direction.OUTPUT
 toggle = True
 
 while True:
-    pin_12.value = toggle
+    pin_15.value = toggle
     sleep(1.0)
     toggle = not toggle
 ```
+
+> Note that the Pico is a little different from the Feather.
+> The pins are numbered differently.  For these examples, use `board.GP15` on the Pico instead of `board.D12`.  On the Pico the number 15 pin will be on the corner.
 
 ---
 
@@ -57,6 +60,6 @@ while True:
 * Code a traffic light
 
 ## References:
-* Feather RP2040 documentation:  https://learn.adafruit.com/adafruit-feather-rp2040-pico
-* Feather RP2040 Pinout diagram:  https://cdn-learn.adafruit.com/assets/assets/000/100/740/medium800/adafruit_products_RP2040Pinout300DPI.png
+* Raspberry Pi Pico documentation:  https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
+* Raspberry Pi Pico Pinout diagram:  https://www.raspberrypi.com/documentation/microcontrollers/images/pico-pinout.svg
 
