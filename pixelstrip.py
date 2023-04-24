@@ -13,27 +13,62 @@ def current_time():
     return time.monotonic()
 
 
-class PixelStrip(neopixel.NeoPixel):
+MATRIX_TOP = 0x01           # Pixel 0 is at top of matrix
+MATRIX_BOTTOM = 0x02        # Pixel 0 is at bottom of matrix
+MATRIX_LEFT = 0x04          # Pixel 0 is at left of matrix
+MATRIX_RIGHT = 0x08         # Pixel 0 is at right of matrix
+MATRIX_ROW_MAJOR = 0x10     # Matrix is row major (horizontal)
+MATRIX_COLUMN_MAJOR = 0x20  # Matrix is column major (vertical)
+MATRIX_PROGRESSIVE = 0x40   # Same pixel order across each line
+MATRIX_ZIGZAG = 0x80        # Pixel order reverses between lines
+
+
+class PixelStrip():
     """
-    Subclass of NeoPixel, but supporting Animations.
+    Extends NeoPixel, but supporting Animations.
     """
 
     def __init__(
-        self, pin, n, bpp=4, brightness=1.0, auto_write=False, pixel_order=None
+        self, pin, n=8, width=None, height=None, brightness=1.0, options=None, auto_write=False, bpp=4,  pixel_order=None
     ):
-        neopixel.NeoPixel.__init__(
-            self,
-            pin,
-            n,
-            bpp=bpp,
-            brightness=brightness,
-            auto_write=auto_write,
-            pixel_order=pixel_order,
-        )
+        self._options = { MATRIX_PROGRESSIVE, MATRIX_ROW_MAJOR, MATRIX_TOP, MATRIX_LEFT }
+        self.width = n
+        self.height = 1
+        if width is not None and height is not None:
+            n = width * height
+            self.width = width
+            self.height = height
+        if options is not None:
+            self._options = options
         self._timeout = None
         self._animation = None
         self._prev_time = current_time()
+        self.wrap = False
         self.CLEAR = (0, 0, 0, 0) if bpp == 4 else (0, 0, 0)
+        self.npxl = neopixel.NeoPixel(
+            pin,
+            n,
+            brightness=brightness,
+            auto_write=auto_write,
+            bpp=bpp,
+            pixel_order=pixel_order,
+        )
+
+    def show(self):
+        self.npxl.show()
+
+    def fill(self, color):
+        self.npxl.fill(color)
+
+    def _setitem(self, index, color):
+        self.npxl[index] = color
+
+    @property
+    def n(self):
+        return len(self.npxl)
+
+    def __len__(self):
+        return len(self.npxl)
 
     def draw(self):
         """
@@ -51,6 +86,8 @@ class PixelStrip(neopixel.NeoPixel):
         self._prev_time = current_time()
         if self._animation is not None:
             self._animation.reset(self)
+        else:
+            self.clear()
 
     def clear(self):
         """
@@ -58,6 +95,46 @@ class PixelStrip(neopixel.NeoPixel):
         """
         self.fill(self.CLEAR)
         self.show()
+
+    def __getitem__(self, index):
+        return self.npxl[index]
+
+    def __setitem__(self, index, color):
+        if type(index) is tuple:
+            nn = self._translate_pixel(index[0], index[1])
+        else:
+            nn = index
+        if self.wrap:
+            while nn < 0:
+                nn += len(self)
+            while nn >= len(self):
+                nn -= len(self)
+        self._setitem(nn, color)
+
+    def _translate_pixel(self, x, y):
+        xx = x
+        yy = y
+
+        if MATRIX_TOP in self._options and MATRIX_RIGHT in self._options:
+            xx = y
+            yy = self.height - (x + 1)
+        elif MATRIX_BOTTOM in self._options and MATRIX_RIGHT in self._options:
+            xx = self.width - (x + 1)
+            yy = self.height - (y + 1)
+        elif MATRIX_BOTTOM in self._options and MATRIX_LEFT in self._options:
+            xx = self.width - (y + 1)
+            yy = x
+
+        if MATRIX_ZIGZAG in self._options:
+            if MATRIX_COLUMN_MAJOR in self._options and xx % 2 == 1:
+                yy = self.height - (yy + 1)
+            elif MATRIX_ROW_MAJOR in self._options and yy % 2 == 1:
+                xx = self.width - (xx + 1)
+
+        if MATRIX_COLUMN_MAJOR in self._options:
+            return xx * self.height + yy
+        else:
+            return xx + yy * self.width
 
     @property
     def animation(self):
@@ -68,6 +145,8 @@ class PixelStrip(neopixel.NeoPixel):
         self._animation = anim
         if self._animation is not None:
             self._animation.reset(self)
+        else:
+            self.clear()
 
     @property
     def timeout(self):
@@ -98,8 +177,19 @@ class Animation:
     """
     Base class for all animations.
     """
-    def __init__(self):
+
+    def __init__(self, name=None):
         self._timeout = None
+        self._name = name
+
+    def __repr__(self):
+        t = self.__class__.__name__
+        n = "" if self._name is None else self._name
+        return "{}({})".format(t, n)
+
+    def __str__(self):
+        t = self.__class__.__name__
+        return t if self._name is None else self._name
 
     def reset(self, strip):
         """

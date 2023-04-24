@@ -13,7 +13,7 @@ from utime import sleep
 from pixelstrip import PixelStrip
 from colors import *
 
-strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.RGB)
+strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
 
 while True:
     strip[0] = (0, 64, 64)
@@ -32,7 +32,7 @@ Here's a program that uses a loop to set multiple pixels:
 from utime import sleep
 from pixelstrip import PixelStrip
 
-strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.RGB)
+strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
 
 while True:
     r = 128
@@ -55,7 +55,7 @@ Here is a program that uses a 'timeout' on the PixelStrip.
 from pixelstrip import PixelStrip
 from random import randint
 
-strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.RGB)
+strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
 strip.timeout = 1.0
 
 while True:

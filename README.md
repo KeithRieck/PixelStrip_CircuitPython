@@ -115,7 +115,7 @@ class BlinkAnimation(pixelstrip.Animation):
             strip.show()
 
 # Create a PixelStrip object connected to digital IO pin 12
-strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
+strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
 
 # Assign an instance of the new Animation into the strip
 strip_12.animation = BlinkAnimation()
@@ -128,4 +128,4 @@ while True:
 > Note that the `PixelStrip` constructor contains special arguments for `bpp` and `pixel_order`.
 > Depending on the WS2812B pixels you purchase, you might need to tweak these values.
 > The `bpp` parameter determines "bytes per pixel" and should almost always be 4. The `pixel_order` parameter determines the order in which colors are addressed.
-> The most common pixel orders are `pixel_order=RGBW` if your pixels have a "white" channel or `pixel_order=RGB` if there is no extra channel.
+> The most common pixel orders seem to be `pixel_order=RGBW` if your pixels have a "white" channel or `pixel_order=GRB` if there is no extra channel.

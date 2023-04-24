@@ -15,7 +15,7 @@ Construct a `PixelStrip` for the given pin and size.
 
 
 ```python
-strip = pixelstrip.PixelStrip(pin, n=8, brightness=1.0, auto_write=False, pixel_order=pixelstrip.RGB)
+strip = pixelstrip.PixelStrip(pin, n=8, brightness=1.0, auto_write=False, pixel_order=pixelstrip.GRB)
 ```
 
 Construct a `PixelStrip` for the given pin.  The strip size is given by the `n` parameter.  Other parameters are optional.

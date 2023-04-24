@@ -7,7 +7,7 @@ import pixelstrip
 import board
 from colors import *
 
-strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
+strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
 strip.wrap = True
 strip.timeout = 0.0
 
@@ -35,7 +35,7 @@ import pixelstrip
 import board
 from colors import *
 
-strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
+strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
 strip.timeout = 0.0
 c = GREEN
 p = 0
@@ -66,7 +66,7 @@ import pixelstrip
 import board
 from colors import *
 
-strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.RGB)
+strip = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
 strip.wrap = True
 strip.timeout = 0.0
 
