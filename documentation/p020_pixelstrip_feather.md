@@ -1,10 +1,10 @@
-# PixelStrip in CircuitPython
+# PixelStrip in CircuitPython on the Feather microcontroller
 
 PixelStrip is a [CircuitPython](https://circuitpython.org/) module for controlling WS2812 RGB LEDs on the [Adafruit Feather RP2040](https://www.adafruit.com/product/4884).  These LEDs are also known as  [NeoPixels](https://learn.adafruit.com/adafruit-neopixel-uberguide). The PixelStrip library allows you to add Animations to the strip.  Multiple strips can have separate animations that run in parallel.
 
-Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use GP4 for digital input.
+Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use `board.D12` for digital input.
 
-![pixelstrip_setup](./img/pixelstrip_setup_bb.png)
+![pixelstrip_setup](./img/pixelstrip_setup_bb_feather.png)
 
 Copy the `pixelstrip.py`, and `colors.py` files into your board.  Then create the following in a file named `main.py`:
 
