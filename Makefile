@@ -1,18 +1,26 @@
-# Installing mpy-cross : https://ports.macports.org/port/mpy-cross/
+# Compile Python files into CircuitPython MPY files
+
+MPY_CROSS = $(HOME)/Documents/bin/mpy-cross-macos-11-8.0.5-x64
 
 build: lib/pixelstrip.mpy lib/colors.mpy lib/i2cp.mpy
 
-lib/pixelstrip.mpy: pixelstrip.py
+lib/pixelstrip.mpy: src/pixelstrip.py
 	mkdir -p lib
-	mpy-cross pixelstrip.py -o lib/pixelstrip.mpy
+	$(MPY_CROSS) src/pixelstrip.py -o lib/pixelstrip.mpy
 
-lib/colors.mpy: colors.py
+lib/colors.mpy: src/colors.py
 	mkdir -p lib
-	mpy-cross colors.py -o lib/colors.mpy
+	$(MPY_CROSS) src/colors.py -o lib/colors.mpy
 
-lib/i2cp.mpy: i2cp.py
+lib/i2cp.mpy: src/i2cp.py
 	mkdir -p lib
-	mpy-cross i2cp.py -o lib/i2cp.mpy
+	$(MPY_CROSS) src/i2cp.py -o lib/i2cp.mpy
 
 clean:
 	rm -rf lib
+
+
+# Installing myp-cross: https://adafruit-circuit-python.s3.amazonaws.com/index.html?prefix=bin/mpy-cross/
+# Installing mpy-cross on Mac: https://ports.macports.org/port/mpy-cross/
+# See also: https://pypi.org/project/mpy-cross/
+# See also: http://adafru.it/mpy-update

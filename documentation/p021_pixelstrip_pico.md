@@ -4,7 +4,7 @@ PixelStrip is a [CircuitPython](https://circuitpython.org/) module for controlli
 
 Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use `board.GP15` for digital input.
 
-![pixelstrip_setup](./img/pixelstrip_setup_bb_pico.png)
+![pixelstrip_setup](./img/pixelstrip_setup_50_pico.jpeg)
 
 Copy the `pixelstrip.py`, and `colors.py` files into your board.  Then create the following in a file named `main.py`:
 
