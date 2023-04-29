@@ -18,6 +18,8 @@ Now, copy the following libaries into the `lib` directory:
 * `adafruit_pixelbuf.mpy`
 * `pixelstrip.mpy`
 
+![Files](documentation/img/ciruitPython_files.png)
+
 You can now experiment with CircuitPython programs by editing the `main.py` file on the CIRCUITPY drive.
 
 ## Trivial Example - Blinking the onboard LED
@@ -66,7 +68,7 @@ You can use the onboard LED and NeoPixel for testing and debugging.  For instanc
 
 Wire up your Neopixels (WS2812B LEDs) for 5 volts, the ground, and digital input connecting  to one of the board's GPIO pins (pin 12 in the following examples).
 
-![PixelStrip setup](pixelstrip_setup.png)
+![PixelStrip setup](documentation/img/pixelstrip_setup.png)
 
 In code, create a PixelStrip object and assign colors to specific LEDs. Colors are coded as tuples of four integers, each between 0 and 255.
 
