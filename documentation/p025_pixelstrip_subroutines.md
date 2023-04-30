@@ -1,6 +1,6 @@
-# PixelStrip in CircuitPython
+# PixelStrip in CircuitPython - Subroutines
 
-Here is code defines a subroutine to draw a spark, which moves across the strip.
+Here is code that defines a subroutine to draw a spark, which moves across the strip.
 
 ```python
 import pixelstrip

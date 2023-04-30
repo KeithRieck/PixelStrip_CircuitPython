@@ -1,6 +1,7 @@
 import board
 import pixelstrip
 from math import sin, floor
+from colors import *
 
 class PulseAnimation(pixelstrip.Animation):
     """
