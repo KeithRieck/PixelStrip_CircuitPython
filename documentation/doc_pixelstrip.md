@@ -45,14 +45,14 @@ If you are using a linear strip of LEDs rather than a matrix, don't worry about 
 
 All `PixelStrip` objects can be treated as if they were [Python arrays](https://www.w3schools.com/python/python_lists.asp), so you can set colors into strip at any given pixel number.  For instance, writing a color into `strip[0]` will change the color of the first pixel.  You can also read back the color by reading `strip[0]`.
 
-Colors on the `PixelStrip` are represented as a three-number [Python tuple](https://www.w3schools.com/python/python_tuples.asp).  The three numbers give the amount of red, green, and blue in the color.  Each number should be in the range from 0 to 255.  Typically we use hexadecimal numbers, although you can also use normal decimal.
+Colors on the `PixelStrip` are represented as a four-number [Python tuple](https://www.w3schools.com/python/python_tuples.asp).  The first three numbers give the amount of red, green, and blue in the color.  The fourth number is reserved for a white value, for special pixels that include a white channel.  Each number should be in the range from 0 to 255.  Typically we use hexadecimal numbers, although you can also use normal decimal.
 
 Examples:
 ```python
-strip[0] = RED                 # Set the first pixel to be red
-strip[1] = (0x00, 0xff, 0x00)  # Set the second pixel to be green
-strip[2] = (255, 255, 0)       # Set the third pixel to be yellow
-strip[2,6] = BLUE              # Set a pixel in the third column and seventh row of a matrix
+strip[0] = RED                       # Set the first pixel to be red
+strip[1] = (0x00, 0xff, 0x00, 0x00)  # Set the second pixel to be green
+strip[2] = (255, 255, 0, 0)          # Set the third pixel to be yellow
+strip[2,6] = BLUE                    # Set a pixel in the third column and seventh row of a matrix
 ```
 
 Other ways to change pixel colors would be to call the fill() or clear() commands.  

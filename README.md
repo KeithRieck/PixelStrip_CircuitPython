@@ -53,12 +53,12 @@ import board
 import neopixel
 
 pixel = neopixel.NeoPixel(board.NEOPIXEL, 1, brightness=0.3)
-color = (0, 128, 128)
+color = (0, 128, 128, 0)
 
 while True:
     pixel.fill(color)
     sleep(0.5)
-    pixel.fill((0, 0, 0))
+    pixel.fill((0, 0, 0, 0))
     sleep(0.5)
 ```
 
@@ -82,9 +82,9 @@ strip = pixelstrip.PixelStrip(board.D12, 8, auto_write=True)
 
 # Assign color values to individual LEDs
 while True:
-    strip[0] = (128, 0, 0)
+    strip[0] = (128, 0, 0, 0)
     sleep(0.5)
-    strip[0] = (0, 0, 0)
+    strip[0] = (0, 0, 0, 0)
     sleep(0.5)
 ```
 
@@ -111,9 +111,9 @@ class BlinkAnimation(pixelstrip.Animation):
             self.timeout = 1.0
             lights_on = strip[0][0] != 0
             if lights_on:
-                strip.fill((0, 0, 0))
+                strip.fill((0, 0, 0, 0))
             else:
-                strip[0] = (128, 0, 0)
+                strip[0] = (128, 0, 0, 0)
             strip.show()
 
 # Create a PixelStrip object connected to digital IO pin 12

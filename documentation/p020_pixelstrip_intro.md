@@ -10,16 +10,16 @@ Copy the `pixelstrip.mpy`, and `colors.mpy` files into your board's `lib` direct
 
 ```python
 from utime import sleep
-from pixelstrip import PixelStrip
+import pixelstrip
 from colors import *
 
-strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
+strip = pixelstrip.PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
 
 while True:
-    strip[0] = (0, 64, 64)
+    strip[0] = (0, 64, 64, 0)
     strip.show()
     sleep(0.5)
-    strip[0] = (0, 0, 0)
+    strip[0] = (0, 0, 0, 0)
     strip.show()
     sleep(1.5)
 ```
@@ -30,9 +30,9 @@ Here's a program that uses a loop to set multiple pixels:
 
 ```python
 from utime import sleep
-from pixelstrip import PixelStrip
+import pixelstrip
 
-strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
+strip = pixelstrip.PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
 
 while True:
     r = 128
@@ -52,10 +52,10 @@ while True:
 Here is a program that uses a 'timeout' on the PixelStrip.
 
 ```python
-from pixelstrip import PixelStrip
+import pixelstrip
 from random import randint
 
-strip = PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
+strip = pixelstrip.PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
 strip.timeout = 1.0
 
 while True:
@@ -63,7 +63,7 @@ while True:
         r = randint(0, 255)
         g = randint(0, 255)
         b = randint(0, 255)
-        strip[0] = (r, g, b)
+        strip[0] = (r, g, b, 0)
         strip.show()
         strip.timeout = 1.0
 ```
@@ -81,16 +81,16 @@ Copy the `pixelstrip.mpy`, and `colors.mpy` files into your board's `lib` direct
 
 ```python
 from utime import sleep
-from pixelstrip import PixelStrip
+import pixelstrip
 from colors import *
 
-strip = PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
+strip = pixelstrip.PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
 
 while True:
-    strip[0] = (0, 64, 64)
+    strip[0] = (0, 64, 64, 0)
     strip.show()
     sleep(0.5)
-    strip[0] = (0, 0, 0)
+    strip[0] = (0, 0, 0, 0)
     strip.show()
     sleep(1.5)
 ```
@@ -101,15 +101,15 @@ Here's a program that uses a loop to set multiple pixels:
 
 ```python
 from utime import sleep
-from pixelstrip import PixelStrip
+import pixelstrip
 
-strip = PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
+strip = pixelstrip.PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
 
 while True:
     r = 128
     g = 0
     for p in range(len(strip)):
-        strip[p] = (r, g, 0)
+        strip[p] = (r, g, 0, 0)
         r = r - 12
         g = g + 12
     strip.show()
@@ -123,10 +123,10 @@ while True:
 Here is a program that uses a 'timeout' on the PixelStrip.
 
 ```python
-from pixelstrip import PixelStrip
+import pixelstrip
 from random import randint
 
-strip = PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
+strip = pixelstrip.PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
 strip.timeout = 1.0
 
 while True:
@@ -134,7 +134,7 @@ while True:
         r = randint(0, 255)
         g = randint(0, 255)
         b = randint(0, 255)
-        strip[0] = (r, g, b)
+        strip[0] = (r, g, b, 0)
         strip.show()
         strip.timeout = 1.0
 ```

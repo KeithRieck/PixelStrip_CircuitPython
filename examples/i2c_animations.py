@@ -15,11 +15,11 @@ animation = [
 
 # List of PixelStrips
 strip = [
-    pixelstrip.PixelStrip(
-        board.D12, 8, bpp=4, pixel_order=pixelstrip.RGBW, brightness=BRIGHTNESS
+    PixelStrip(
+        board.D12, 8, bpp=4, pixel_order="RGBW", brightness=BRIGHTNESS
     ),
-    pixelstrip.PixelStrip(
-        board.D11, 8, bpp=4, pixel_order=pixelstrip.RGBW, brightness=BRIGHTNESS
+    PixelStrip(
+        board.D11, 8, bpp=4, pixel_order="RGBW", brightness=BRIGHTNESS
     )
 ]
 
