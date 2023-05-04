@@ -3,7 +3,7 @@
 
 from machine import mem32
 
-class i2cSlave:
+class I2cPerf:
     """
     Simple I2C peripheral class for the RP2040.
     An I2cPerf object passively waits for messages from a Controller object.
@@ -40,10 +40,10 @@ class i2cSlave:
     def _clr_reg(self, reg, data):
         self._write_reg(reg, data, method=self.mem_clr)
                 
-    def __init__(self, i2c_ID = 0, sda=0,  scl=1, slave_address=0x41):
+    def __init__(self, i2c_ID = 0, sda=0,  scl=1, address=0x41):
         self.scl = scl
         self.sda = sda
-        self.slaveAddress = slave_address
+        self.perfAddress = address
         self.i2c_ID = i2c_ID
         if self.i2c_ID == 0:
             self.i2c_base = self.I2C0_BASE
@@ -56,7 +56,7 @@ class i2cSlave:
         # clr bit 0 to 9
         # set slave address
         self._clr_reg(self.IC_SAR, 0x1ff)
-        self._set_reg(self.IC_SAR, self.slaveAddress &0x1ff)
+        self._set_reg(self.IC_SAR, self.perfAddress &0x1ff)
         # 3 write IC_CON  7 bit, enable in slave-only
         self._clr_reg(self.IC_CON, 0b01001001)
         # set SDA PIN
@@ -68,7 +68,7 @@ class i2cSlave:
         # 4 enable i2c 
         self._set_reg(self.IC_ENABLE, 1)
 
-    def any(self):
+    def available(self):
         """
         Returns True/False on whether there is a message available to be received.
         """
@@ -78,16 +78,16 @@ class i2cSlave:
         if status &  8 :
             return True
         return False
-
-    def get(self):
+    
+    def read(self):
         """
         Returns one byte sent from the Controller.
         """
-        while not self.any():
+        while not self.available():
             pass
         return mem32[ self.i2c_base | self.IC_DATA_CMD] & 0xff
 
-    def put(self, data):
+    def write(self, data):
         """
         Sends one byte back to the Controller.
         """

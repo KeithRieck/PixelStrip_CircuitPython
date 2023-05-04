@@ -1,5 +1,5 @@
 import digitalio
-from i2cp import i2cSlave
+from i2cp import I2cPerf
 from pixelstrip import PixelStrip, current_time
 from animation_pulse import PulseAnimation
 
@@ -27,12 +27,12 @@ strip = [
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
-i2c_slave = i2cSlave(0,sda=16,scl=17,slave_address=I2C_ADDRESS)
+i2c_peripheral = I2cPerf(0,sda=16,scl=17,slave_address=I2C_ADDRESS)
 
 def receive_message():
-    global i2c_slave
-    if i2c_slave.any():
-        b = i2c_slave.get()
+    global i2c_peripheral
+    if i2c_peripheral.any():
+        b = i2c_peripheral.get()
         strip_num = int((b & 0xF0) >> 4)
         anim_num = int(b & 0x0F)
         return (strip_num, anim_num)
