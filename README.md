@@ -11,12 +11,11 @@ First, install the latest version of CircuitPython, [downloading a UF2 file spec
 Second, [download the latest CircuitPython libraries](https://circuitpython.org/libraries).
 This package will contain the latest `neopixel.mpy` library, and others.
 
-On your laptop, download [Visual Studio Code](https://code.visualstudio.com/) with the [CircuitPython](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython) extension.  Most of the CircuitPython tutorials use the [Mu](https://codewith.mu/) editor, which is a good choice.  I choose to work mostly with Visual Studio Code, since VSC is supported by [FIRST](https://www.firstinspires.org/) robotics.
+On your laptop, download [Visual Studio Code](https://code.visualstudio.com/) with the [CircuitPython](https://marketplace.visualstudio.com/items?itemName=joedevivo.vscode-circuitpython) extension.  Although most of the CircuitPython tutorials use the [Mu](https://codewith.mu/) editor,  I choose to work mostly with Visual Studio Code, since VSC is supported by [FIRST](https://www.firstinspires.org/) robotics.
 
 Now, copy the following libaries into the `lib` directory:
-* `neopixel.mpy`
-* `adafruit_pixelbuf.mpy`
-* `pixelstrip.mpy`
+* `neopixel.mpy` and `adafruit_pixelbuf.mpy` taken from the CircuitPython libraries
+* `pixelstrip.mpy` and `colors.mpy` 
 
 ![Files](documentation/img/ciruitPython_files.png)
 
