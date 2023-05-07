@@ -38,7 +38,7 @@ while True:
     r = 128
     g = 0
     for p in range(len(strip)):
-        strip[p] = (r, g, 0)
+        strip[p] = (r, g, 0, 0)
         r = r - 12
         g = g + 12
     strip.show()

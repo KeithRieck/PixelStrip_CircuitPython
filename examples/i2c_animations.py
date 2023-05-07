@@ -1,5 +1,6 @@
 import digitalio
-from i2cp import I2cPerf
+import board
+from i2ctarget import I2CTarget
 from pixelstrip import PixelStrip, current_time
 from animation_pulse import PulseAnimation
 
@@ -15,24 +16,22 @@ animation = [
 
 # List of PixelStrips
 strip = [
-    PixelStrip(
-        board.D12, 8, bpp=4, pixel_order="RGBW", brightness=BRIGHTNESS
-    ),
-    PixelStrip(
-        board.D11, 8, bpp=4, pixel_order="RGBW", brightness=BRIGHTNESS
-    )
+    PixelStrip(board.GP4, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.GP5, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS)
 ]
 
 # The built-in LED will turn on for half a second after every message
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
-i2c_peripheral = I2cPerf(0,sda=16,scl=17,slave_address=I2C_ADDRESS)
+i2c = I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS])
 
+# Receive one byte through I2C, if available
 def receive_message():
-    global i2c_peripheral
-    if i2c_peripheral.any():
-        b = i2c_peripheral.get()
+    global i2c
+    message = i2c.request()
+    if message:
+        b = message.read(n=1)[0]
         strip_num = int((b & 0xF0) >> 4)
         anim_num = int(b & 0x0F)
         return (strip_num, anim_num)
@@ -51,7 +50,8 @@ def main():
         if message:
             strip_num = message[0]
             anim_num = message[1]
-            strip[strip_num].animation = animation[anim_num]
+            if strip_num < len(strip) and anim_num < len(animation):
+                strip[strip_num].animation = animation[anim_num]
             last_msg_time = current_time()
         led.value = (current_time() < last_msg_time + 0.5)
 
