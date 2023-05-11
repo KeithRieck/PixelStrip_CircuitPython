@@ -104,18 +104,18 @@ from time import sleep
 import board
 import digitalio
 
-pin_15 = digitalio.DigitalInOut(board.GP15)
-pin_15.direction = digitalio.Direction.OUTPUT
+pin_16 = digitalio.DigitalInOut(board.GP16)
+pin_16.direction = digitalio.Direction.OUTPUT
 toggle = True
 
 while True:
-    pin_15.value = toggle
+    pin_16.value = toggle
     sleep(1.0)
     toggle = not toggle
 ```
 
 > Note that the Pico is a little different from the Feather.
-> The pins are numbered differently.  For these examples, use `board.GP15` on the Pico instead of `board.D12`.  On the Pico the number 15 pin will be on the corner.
+> The pins are numbered differently.  For these examples, use `board.GP16` on the Pico instead of `board.D12`.  On the Pico the number 16 pin will be on the corner.
 
 ---
 
