@@ -1,3 +1,17 @@
+# I2C communication
+
+The [Inter-Integrated Circuit](https://en.wikipedia.org/wiki/I%C2%B2C) bus is a mechanism allowing electrical components to talk to each other.  We can use it to communcate between microcontrollers such as Arduinos, Raspberry Pi Picos, or Feather boards.  These boards can also use I2C to talk to computers, such as the Raspberry Pi or the RoboRIO.
+
+This directory contains example code allowing [CircuitPython](https://learn.adafruit.com/welcome-to-circuitpython) code to operate on the I2C bus.
+
+# Wire Library Example
+
+The Arduino supports a simple library called [Wire](https://www.arduino.cc/reference/en/language/functions/communication/wire/) for allowing Arduinos to communicate through I2C.  The documentation for Wire contains an [excellent example](https://wiki-content.arduino.cc/en/Tutorial/LibraryExamples/MasterWriter#code) where one Arduino to talks to another.
+
+A similar example can be created allowing two CircuitPython boards to talk to each other.  The `wire_writer.py` program sends out a short text message every three seconds.  The `wire_receiver.py` program receives that message and prints it out to the serial terminal.  Note that the writer flashes its onboard LED whenever a message is sent, and the reader program flashes its LED whenever a message is received.  You should see both boards flashing their onboard LEDs at the same time.
+
+![Wire](img/wire_example_bb.png)
+
 # I2C Animation Test
 
 This project demonstrates that NeoPixel strips connected to a Raspberry Pi Pico can have their animations changed based on I2C communication from an Arduino.  The project has two parts:
@@ -17,7 +31,7 @@ For the Pico program, files should be installed onto the Pico.  First copy the f
 * `main.py`, copied from `i2c_animations.py`
 * `animation_pulse.py` copied from the PixelStrip examples.  Comment out the "main" routine in the last 8 lines of this file.
 
-![Files ](img/i2c_test_files.png)
+![Files](img/i2c_test_files.png)
 
 
 ## Arduino Hardware Setup
