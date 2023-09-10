@@ -8,7 +8,7 @@ import digitalio
 # If set correctly, the origin pixel should be in the upper left 
 # corner and BLUE/WHITE pixels should go left-to-right / top-to-bottom.
 
-strip = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT})
+strip = pixelstrip.PixelStrip(board.GP4, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT})
 strip.clear()
 TIME = 0.200
 
