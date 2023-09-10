@@ -9,7 +9,8 @@ Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In th
 Copy the `pixelstrip.mpy`, and `colors.mpy` files into your board's `lib` directory.   Then create the following in a file named `main.py`:
 
 ```python
-from utime import sleep
+from time import sleep
+import board 
 import pixelstrip
 from colors import *
 
@@ -29,7 +30,8 @@ Note that colors are denoted with tuples of red, green, and blue values.  Each c
 Here's a program that uses a loop to set multiple pixels:
 
 ```python
-from utime import sleep
+from time import sleep
+import board 
 import pixelstrip
 
 strip = pixelstrip.PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
@@ -53,6 +55,7 @@ Here is a program that uses a 'timeout' on the PixelStrip.
 
 ```python
 import pixelstrip
+import board 
 from random import randint
 
 strip = pixelstrip.PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
@@ -80,7 +83,8 @@ Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In th
 Copy the `pixelstrip.mpy`, and `colors.mpy` files into your board's `lib` directory.  Then create the following in a file named `main.py`:
 
 ```python
-from utime import sleep
+from time import sleep
+import board 
 import pixelstrip
 from colors import *
 
@@ -100,7 +104,8 @@ Note that colors are denoted with tuples of red, green, and blue values.  Each c
 Here's a program that uses a loop to set multiple pixels:
 
 ```python
-from utime import sleep
+from time import sleep
+import board 
 import pixelstrip
 
 strip = pixelstrip.PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
@@ -125,6 +130,7 @@ Here is a program that uses a 'timeout' on the PixelStrip.
 ```python
 import pixelstrip
 from random import randint
+import board 
 
 strip = pixelstrip.PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
 strip.timeout = 1.0

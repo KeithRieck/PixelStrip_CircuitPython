@@ -204,6 +204,42 @@ if strip.is_timed_out():
 Returns `True` if the strip's timeout has expired.
 
 
+### load_font(font_file)
+
+```python
+strip.load_font('3x5-dot-matrix.bdf')
+```
+
+Loads a BDF or PCF font file in, so text may be drawn in that font style.
+
+
+### draw_text(message, x, y)
+
+```python
+strip.draw_text('Hello World', 0, 0, color=YELLO)
+```
+
+Draws a text message onto a Matrix at the given coordinates.  A font must have been loaded prior to this call. Uses the [Adafruit Bitmap Font Library](https://docs.circuitpython.org/projects/bitmap-font/en/latest/index.html).
+
+
+### draw_line(x1, y1, x2, y2)
+
+```python
+strip.draw_line(0, 0, 20, 5, color=GREEN)
+```
+
+Draws a line onto a Matrix.
+
+
+## draw_rect(x, y, w, h)
+
+```python
+strip.draw_rect(0, 0, 32, 8, color=BLUE, fill=True)
+```
+
+Draws a rectangle, either just the outlines or fully filled in.
+
+
 ---
 
 ## Colors
