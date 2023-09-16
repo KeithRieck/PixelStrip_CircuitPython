@@ -15,7 +15,7 @@ On your laptop, download [Visual Studio Code](https://code.visualstudio.com/) wi
 
 Now, copy the following libaries into the `lib` directory:
 * `neopixel.mpy` and `adafruit_pixelbuf.mpy` taken from the CircuitPython libraries
-* The wole folder for `adafruit_bitmap_font`.
+* The whole folder for `adafruit_bitmap_font`.
 * `pixelstrip.mpy` and `colors.mpy` 
 
 ![Files](documentation/img/ciruitPython_files.png)
