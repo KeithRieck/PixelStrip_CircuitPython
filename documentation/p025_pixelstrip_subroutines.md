@@ -74,7 +74,7 @@ def shift_color(c1, c2, m):
     r = int(c1[0] * m + c2[0] * (1-m))
     g = int(c1[1] * m + c2[1] * (1-m))
     b = int(c1[2] * m + c2[2] * (1-m))
-    return (r, g, b)
+    return (r, g, b, 0)
 
 i = 0
 while True:

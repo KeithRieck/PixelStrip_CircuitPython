@@ -54,9 +54,9 @@ while True:
 Here is a program that uses a 'timeout' on the PixelStrip.
 
 ```python
+from random import randint
 import pixelstrip
 import board 
-from random import randint
 
 strip = pixelstrip.PixelStrip(board.D12, 8, pixel_order=pixelstrip.GRB)
 strip.timeout = 1.0
@@ -128,9 +128,10 @@ while True:
 Here is a program that uses a 'timeout' on the PixelStrip.
 
 ```python
-import pixelstrip
 from random import randint
+from time import sleep
 import board 
+import pixelstrip
 
 strip = pixelstrip.PixelStrip(board.GP15, 8, pixel_order=pixelstrip.GRB)
 strip.timeout = 1.0

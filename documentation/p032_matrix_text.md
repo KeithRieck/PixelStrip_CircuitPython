@@ -10,9 +10,9 @@ Here is a simple example which displays two words, with brief pauses between mes
 
 ```python
 from time import sleep
-from colors import *
 import pixelstrip
 import board
+from colors import *
 
 matrix = pixelstrip.PixelStrip(board.GP4, width=32, height=8, auto_write=True,
                                bpp=4, pixel_order=pixelstrip.GRB,

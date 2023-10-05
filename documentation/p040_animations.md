@@ -7,9 +7,9 @@ When we deploy to the robot, we will want to control multiple strips of LEDs run
 For each animation type, you must define an Animation `class`.  The class then allows you to create separate animation `objects`.   When you attach an animation object each strip object, that animation can start executing.   Here is a simple example of an `Animation`:
 
 ```Python
-from colors import *
 from pixelstrip import PixelStrip, Animation, GRB
 import board
+from colors import *
 
 # Define a new Animation
 class BlinkAnimation(Animation):
@@ -43,9 +43,9 @@ while True:
 Here is another animation.  Note that this animation uses a local variable `p` to store the curent location of the moving pixel:
 
 ```Python
-from colors import *
 from pixelstrip import PixelStrip, Animation, GRB
 import board
+from colors import *
 
 class SparkAnimation(Animation):
     def __init__(self):

@@ -28,9 +28,9 @@ while True:
 You can break a complex program into smaller functions:
 
 ```python
-from colors import *
 import pixelstrip
 import board
+from colors import *
 
 matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 matrix.timeout = 0.0
@@ -52,10 +52,10 @@ while True:
 Here's another function for drawing:
 
 ```python
-from colors import *
+from random import randint
 import pixelstrip
 import board
-from random import randint
+from colors import *
 
 matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 matrix.timeout = 0.0
