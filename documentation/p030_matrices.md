@@ -19,7 +19,7 @@ i = 0
 while True:
     if matrix.is_timed_out():
         matrix.clear()
-        matrix[i, i] = (0, 0, 128)
+        matrix[i, i] = (0, 0, 128, 0)
         matrix.show()
         i = (i + 1) % 8
         matrix.timeout = 0.7
@@ -34,19 +34,19 @@ from colors import *
 
 matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 matrix.timeout = 0.0
-r = 0
+c = 0
 
-def draw_vertical_line(m, row, color):
-    for col in range(m.height):
-        m[row, col] = color
+def draw_vertical_line(m, col, color):
+    for row in range(m.width):
+        m[col, row] = color
 
 while True:
     if matrix.is_timed_out():
         matrix.clear()
-        draw_vertical_line(matrix, r, YELLOW)
+        draw_vertical_line(matrix, c, YELLOW)
         matrix.show()
         matrix.timeout = 0.5
-        r = (r + 1) % matrix.width
+        c = (c + 1) % matrix.height
 ```
 
 Here's another function for drawing:
@@ -60,18 +60,57 @@ from colors import *
 matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 matrix.timeout = 0.0
 
-def draw_box(m, row, col, color):
-    m[row, col] = color
-    m[row+1, col] = color
-    m[row, col+1] = color
-    m[row+1, col+1] = color
+def draw_box(m, x, y, color):
+    m[x, y] = color
+    m[x+1, y] = color
+    m[x, y+1] = color
+    m[x+1, y+1] = color
 
 while True:
     if matrix.is_timed_out():
         matrix.clear()
-        r = randint(0, matrix.width)
-        c = randint(0, matrix.height)
-        draw_box(matrix, r, c, GREEN)
+        r = randint(0, matrix.width-2)
+        c = randint(0, matrix.height-2)
+        draw_box(matrix, c, r, BLUE)
         matrix.show()
         matrix.timeout = 1.0
+```
+
+In the long run, we want light matrix demos to be in the form of Animation classes:
+
+```python
+import pixelstrip
+import board
+from colors import *
+
+# Define a new Animation
+class StripeAnimation(pixelstrip.Animation):
+    def __init__(self):
+        pixelstrip.Animation.__init__(self)
+        self.color = GREEN
+        self.row = 0
+
+    def reset(self, matrix):
+        self.timeout = 0.0
+
+    def draw(self, matrix, delta_time):
+        if self.is_timed_out():     
+            matrix.clear()
+            for c in range(self.row + 1):
+                r = self.row - c
+                matrix[c, r] = self.color
+            self.row = (self.row + 1) % matrix.height
+            matrix.show()
+            self.timeout = 0.25
+
+
+# Create a PixelStrip object connected to digital IO pin GP4
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
+
+# Assign an instance of the new Animation into the strip
+matrix.animation = StripeAnimation()
+
+# Repeatedly draw the strip, causing the Animation to run
+while True:
+    matrix.draw()
 ```
