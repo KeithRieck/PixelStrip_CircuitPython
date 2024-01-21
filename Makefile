@@ -2,7 +2,7 @@
 
 MPY_CROSS = $(HOME)/Documents/bin/mpy-cross-macos-11-8.0.5-x64
 
-build: lib lib/pixelstrip.mpy lib/colors.mpy lib/i2cp.mpy
+build: lib lib/pixelstrip.mpy lib/colors.mpy lib/i2cp.mpy lib/bmp.mpy
 
 lib:
 	mkdir -p lib
@@ -15,6 +15,10 @@ lib/colors.mpy: src/colors.py
 
 lib/i2cp.mpy: src/i2cp.py
 	$(MPY_CROSS) src/i2cp.py -o lib/i2cp.mpy
+
+
+lib/bmp.mpy: src/bmp.py
+	$(MPY_CROSS) src/bmp.py -o lib/bmp.mpy
 
 clean:
 	rm -rf lib
