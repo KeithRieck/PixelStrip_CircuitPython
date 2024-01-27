@@ -5,15 +5,19 @@ import bmp
 # Animation to display a list of bitmap files.
 
 class BitmapAnimation(pixelstrip.Animation):
-    def __init__(self, file_names, cycle_time=1.0, flip=False):
+    def __init__(self, file_names, cycle_time=1.0, flip=None):
         pixelstrip.Animation.__init__(self)
         self.cycle_time = cycle_time
         self.file_names = file_names
-        self.flip = flip
+        self.flip = flip if flip is not None else False
         self.bitmaps = []
         for name in file_names:
             self.bitmaps.append(bmp.BmpFile(name))
         self.frame = 0
+        if flip is not None:
+            self.flip = flip
+        else:
+            self.flip = self.bitmaps[0].biXPelsPerMeter > 0
 
     def reset(self, strip):
         strip.clear()
