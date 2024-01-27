@@ -9,7 +9,6 @@ class BitmapAnimation(pixelstrip.Animation):
         pixelstrip.Animation.__init__(self)
         self.cycle_time = cycle_time
         self.file_names = file_names
-        self.flip = flip if flip is not None else False
         self.bitmaps = []
         for name in file_names:
             self.bitmaps.append(bmp.BmpFile(name))
