@@ -64,5 +64,22 @@ class BmpFile:
     def __repr__(self):
         return f"BmpFile('{self.file_name}', width={self.biWidth}, height={self.biHeight}, bits={self.biBitCount})"
 
+    def info(self):
+        return f"""file_name:       {self.file_name}
+bfType:          {self.bfType}
+bfSize:          {self.bfSize} 
+bfOffBits:       {self.bfOffBits} 
+biSize:          {self.biSize}
+biWidth:         {self.biWidth}
+biHeight:        {self.biHeight} 
+biPlanes:        {self.biPlanes}
+biBitCount:      {self.biBitCount}
+biCompression:   {self.biCompression}
+biSizeImage:     {self.biSizeImage}
+biXPelsPerMeter: {self.biXPelsPerMeter}
+biYPelsPerMeter: {self.biYPelsPerMeter}
+biClrUsed:       {self.biClrUsed}
+biClrImportant:  {self.biClrImportant}
+"""
 
 
