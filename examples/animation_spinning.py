@@ -26,10 +26,9 @@ class SpinningAnimation(pixelstrip.Animation):
             strip.show()
 
 
-def main():
+if __name__ == "__main__":
     strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
     strip_12.animation = SpinningAnimation((128, 64, 0, 0))
     while True:
         strip_12.draw()
 
-main()

@@ -104,13 +104,14 @@ class StripeAnimation(pixelstrip.Animation):
             self.timeout = 0.25
 
 
-# Create a PixelStrip object connected to digital IO pin GP4
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
+if __name__ == "__main__":
+    # Create a PixelStrip object connected to digital IO pin GP4
+    matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
 
-# Assign an instance of the new Animation into the strip
-matrix.animation = StripeAnimation()
+    # Assign an instance of the new Animation into the strip
+    matrix.animation = StripeAnimation()
 
-# Repeatedly draw the strip, causing the Animation to run
-while True:
-    matrix.draw()
+    # Repeatedly draw the strip, causing the Animation to run
+    while True:
+        matrix.draw()
 ```

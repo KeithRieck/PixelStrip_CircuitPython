@@ -45,7 +45,7 @@ class StatsAnimation(pixelstrip.Animation):
         self.stat_num = 0
 
 
-def main():
+if __name__ == "__main__":
     matrix = pixelstrip.PixelStrip(board.GP4, width=32, height=8,
                                    bpp=4, pixel_order=pixelstrip.GRB,
                                    options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT,
@@ -59,6 +59,3 @@ def main():
     
     while True:
         matrix.draw()
-
-
-main()

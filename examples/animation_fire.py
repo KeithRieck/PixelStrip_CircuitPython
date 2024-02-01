@@ -88,15 +88,15 @@ def blink(n, strip=None):
             strip.show()
         sleep(0.3)
 
-# def main():
-#     strip_12 = pixelstrip.PixelStrip(board.D12, NUM_PIXELS, bpp=4, pixel_order=pixelstrip.GRB)
-#     strip_12.animation = FireAnimation(cooling=70, sparking=30)
-#     blink(3, strip=strip_12)
-#     while True:
-#         strip_12.draw()
-#         sleep(0.02)
+
+if __name__ == "__main__":
+    strip_12 = pixelstrip.PixelStrip(board.D12, NUM_PIXELS, bpp=4, pixel_order=pixelstrip.GRB)
+    strip_12.animation = FireAnimation(cooling=70, sparking=30)
+    blink(3, strip=strip_12)
+    while True:
+        strip_12.draw()
+        sleep(0.02)
         
-# main()
 
 
 

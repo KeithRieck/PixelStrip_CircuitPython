@@ -42,10 +42,9 @@ class PulseAnimation(pixelstrip.Animation):
             floor(color[3] * brightness),
         )
 
-def main():
+
+if __name__ == "__main__":
     strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
     strip_12.animation = PulseAnimation()
     while True:
         strip_12.draw()
-
-main()

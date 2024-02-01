@@ -23,10 +23,9 @@ class MyAnimation(pixelstrip.Animation):
         strip.show()
 
 
-def main():
+if __name__ == "__main__":
     strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
     strip_12.animation = MyAnimation()
     while True:
         strip_12.draw()
 
-main()

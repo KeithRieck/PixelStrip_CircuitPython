@@ -39,10 +39,9 @@ class BitmapAnimation(pixelstrip.Animation):
                         yy = y if not self.flip else strip.height-(y+1)
                         strip[x, yy] = bitmap[x, y]
                 
-def main():
+
+if __name__ == "__main__":
     matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
     matrix.animation = BitmapAnimation(['test1_8x8.bmp', 'test2_8x8.bmp'])
     while True:
         matrix.draw()
-
-main()

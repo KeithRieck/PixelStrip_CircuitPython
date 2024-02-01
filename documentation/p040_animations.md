@@ -21,7 +21,7 @@ class BlinkAnimation(Animation):
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
-            is_light_on = (strip[0] != BLACK)
+            is_light_on = (strip[0][0] + strip[0][1] + strip[0][2]) > 0
             if is_light_on:
                 strip.clear()
             else:
@@ -29,15 +29,16 @@ class BlinkAnimation(Animation):
             strip.show()
             self.timeout = 1.0
 
-# Create a PixelStrip object connected to digital IO pin GP4
-strip = PixelStrip(board.D12, 24, bpp=4, pixel_order=GRB)
+if __name__ == "__main__":
+    # Create a PixelStrip object connected to digital IO pin GP4
+    strip = PixelStrip(board.D12, 24, bpp=4, pixel_order=GRB)
 
-# Assign an instance of the new Animation into the strip
-strip.animation = BlinkAnimation()
+    # Assign an instance of the new Animation into the strip
+    strip.animation = BlinkAnimation()
 
-# Repeatedly draw the strip, causing the Animation to run
-while True:
-    strip.draw()
+    # Repeatedly draw the strip, causing the Animation to run
+    while True:
+        strip.draw()
 ```
 
 Here is another animation.  Note that this animation uses a local variable `p` to store the curent location of the moving pixel:
@@ -65,10 +66,10 @@ class SparkAnimation(Animation):
             self.p = (self.p + 1) % strip.n
             self.timeout = 0.3
 
-strip = PixelStrip(board.D12, 24, bpp=4, pixel_order=GRB)
-strip.wrap = True
-strip.animation = SparkAnimation()
-
-while True:
-    strip.draw()
+if __name__ == "__main__":
+    strip = PixelStrip(board.D12, 24, bpp=4, pixel_order=GRB)
+    strip.wrap = True
+    strip.animation = SparkAnimation()
+    while True:
+        strip.draw()
 ```
