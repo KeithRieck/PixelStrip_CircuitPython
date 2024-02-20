@@ -4,6 +4,19 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+/**
+ * Subsystem to controll all the lights running on the external lights
+ * microcontroller.
+ * <p>
+ * The whole "lights plan" should be implemented from within this subsystem,
+ * controlled mostly from within the {@code periodic()} method.
+ * <p>
+ * If you need external subsystems and commands to communicate into this class,
+ * create "modes" within the class to indicate external states. For instance,
+ * if you need a command to indicate when the robot is preparing to shoot, add
+ * a {@code setShootingMode(boolean)} to this class. Then, add code to the
+ * {@code periodic()} that changes animations based on current modes.
+ */
 public class LightsSubsystem extends SubsystemBase {
 
   public static int I2C_ADDRESS = 0x41;
@@ -16,18 +29,6 @@ public class LightsSubsystem extends SubsystemBase {
 
   private I2C i2c = null;
 
-  /**
-   * Subsystem to controll all the lights running on the external lights
-   * microcontroller.
-   * <p>
-   * The whole "lights plan" should be implemented from within this subsystem,
-   * controlled mostly from within the {@code periodic} method.
-   * <p>
-   * If you need external subsystems and commands to communicate into this class,
-   * create "modes" within the class to indicate external states. For instance,
-   * if you need a command to indicate when the robot is preparing to shoot, add
-   * a {@code setShootingMode(boolean)} to this class.
-   */
   public LightsSubsystem() {
     i2c = new I2C(Port.kOnboard, I2C_ADDRESS);
     clearAllAnimations();
