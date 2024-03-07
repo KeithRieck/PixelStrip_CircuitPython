@@ -20,8 +20,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class LightsSubsystem extends SubsystemBase {
 
   public static int I2C_ADDRESS = 0x41;
-  public static final int MAX_ANIMATIONS = 3;
-  public static final int MAX_STRIPS = 4;
+  public static final int MAX_ANIMATIONS = 3;    // Must be 32 or less
+  public static final int MAX_STRIPS = 4;        // Must be 8 or less
 
   private byte[] currentAnimation = new byte[MAX_STRIPS];
   private byte[] nextAnimation = new byte[MAX_STRIPS];
@@ -59,7 +59,7 @@ public class LightsSubsystem extends SubsystemBase {
    * This should not be called from outside this subsystem.
    */
   protected void setAnimation(int stripNumber, int animNumber) {
-    Integer b = Integer.valueOf(((stripNumber << 4) & 0xF0) | (animNumber & 0x0F));
+    Integer b = Integer.valueOf(((stripNumber << 5) & 0xE0) | (animNumber & 0x1F));
     nextAnimation[stripNumber] = b.byteValue();
   }
 

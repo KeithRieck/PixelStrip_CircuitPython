@@ -7,8 +7,8 @@
 
 
 const int I2C_ADDRESS = 0x41;
-const int MAX_ANIMATIONS = 3;
-const int MAX_STRIPS = 4;
+const int MAX_ANIMATIONS = 3;          // Must be 32 or less
+const int MAX_STRIPS = 4;              // Must be 8 or less
 
 void setup()
 {
@@ -26,7 +26,7 @@ void loop()
     anim_number = (anim_number + 1) % (MAX_ANIMATIONS + 1);
   }
 
-  byte b = ((strip_number << 4) & 0xF0) + (anim_number & 0xF);
+  byte b = ((strip_number << 5) & 0xE0) + (anim_number & 0x1F);
   Wire.beginTransmission(I2C_ADDRESS);
   Wire.write(b);
   Wire.endTransmission();
