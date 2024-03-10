@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,8 +21,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class LightsSubsystem extends SubsystemBase {
 
   public static int I2C_ADDRESS = 0x41;
-  public static final int MAX_ANIMATIONS = 3;    // Must be 32 or less
-  public static final int MAX_STRIPS = 4;        // Must be 8 or less
+  public static final int MAX_ANIMATIONS = 20;   // Must be 32 or less
+  public static final int MAX_STRIPS = 5;        // Must be 8 or less
 
   private byte[] currentAnimation = new byte[MAX_STRIPS];
   private byte[] nextAnimation = new byte[MAX_STRIPS];
@@ -64,7 +65,7 @@ public class LightsSubsystem extends SubsystemBase {
   }
 
   /**
-   * Push out all animation changes to the Pico. <br/>
+   * Push out all animation changes to the Lights Board. <br/>
    * This program takes a <em>lazy</em> approach, in that animation signals are
    * only sent out if they <em>need</em> to change. Signals are only sent if the
    * desired animation is different from the current animation.
