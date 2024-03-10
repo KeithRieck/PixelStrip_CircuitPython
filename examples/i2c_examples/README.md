@@ -14,7 +14,7 @@ A similar example can be created allowing two CircuitPython boards to talk to ea
 
 # I2C Animation Test
 
-This project demonstrates that NeoPixel strips connected to a Raspberry Pi Pico can have their animations changed based on I2C communication from an Arduino.  The project has two parts:
+This project demonstrates that NeoPixel strips connected to a microcontroller can have their animations changed based on I2C communication from an Arduino.  The project has two parts:
 
 * `i2c_animation_tester_arduino.ino` is an Arduino program.  It acts as an I2C controller (master device) on the I2C bus.  Every five seconds, it picks a new strip number and animation number. These numbers are coded into a single byte, and the program sends out one byte message on the bus, which should cause animations to change.
 * `i2c_animations.py` is a MicroPython program for the Raspberry Pi Pico.  It acts as an I2C target also on the I2C bus.  When it receives a single byte message, it decodes the strip number and animation number from that byte, and then changes the animations on one strip.
@@ -52,6 +52,29 @@ This program assumes that you use an XBox controller, but you can easily modify 
 
 Starting with Visual Studio Code where you have installed the [WPILib package](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/index.html).  Execute the "Create a new project" task and then select: Template > Java > Timed Skeleton.  From the resulting project, open up the `Robot.java` file and then copy in the value from this repository.
 
-## RoboRIO Hardware Setup
+# RoboRIO Hardware Setup
 
 Connect the Pico's ground, clock, and data pins to the I2C pins on the top of the RoboRIO. Don't worry about the power pin.
+
+
+# i2c_sender
+
+This application runs on a SparkFun [RedBoard Artemis ATP](https://www.sparkfun.com/products/15442).  It generates I2C signals to trigger animations changes.
+
+### Arduino IDE setup
+
+I developed this using the [Arduino IDE](https://arduino.cc) version 1.8.19. Add some things to your Arduino IDE for [Artemis Development](https://learn.sparkfun.com/tutorials/artemis-development-with-arduino/all).
+
+File > Preferences
+
+Paste the following into the "Additional Board Manager URLs" window:
+```
+https://raw.githubusercontent.com/sparkfun/Arduino_Boards/main/IDE_Board_Manager/package_sparkfun_index.json
+https://adafruit.github.io/arduino-board-index/package_adafruit_index.json
+```
+
+Tools > Board > Boards Manager...
+
+Search for "Apollo" and then install the "SparkFun Apollo3 Boards" package.
+
+
