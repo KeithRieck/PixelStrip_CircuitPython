@@ -159,7 +159,7 @@ void setAnimation(int strip_number, int anim_number)
   byte b = ((strip_number << 5) & 0xE0) + (anim_number & 0x1F);
   Wire.beginTransmission(I2C_ADDRESS);
   int bytesTransmitted = Wire.write(b);
-  int status = Wire.endTransmission();
+  byte status = Wire.endTransmission();
   Serial.print("WIRE: ");
   Serial.print(bytesTransmitted);
   Serial.print(" bytes : status = ");
