@@ -72,8 +72,12 @@ void loop() {
 
         byte b = ((strip_number << 5) & 0xE0) + (anim_number & 0x1F);
         Wire.beginTransmission(I2C_ADDRESS);
-        Wire.write(b);
-        Wire.endTransmission();
+        int bytesTransmitted = Wire.write(b);
+        int status = Wire.endTransmission();
+        Serial.print("WIRE: ");
+        Serial.print(bytesTransmitted);
+        Serial.print(" bytes : status = ");
+        Serial.println(status);
 
         send_state = 1;
         led_time = millis() + 500;
