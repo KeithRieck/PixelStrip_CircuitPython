@@ -9,6 +9,7 @@ import digitalio
 # corner and BLUE/WHITE pixels should go left-to-right / top-to-bottom.
 
 strip = pixelstrip.PixelStrip(board.GP4, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT})
+#strip = pixelstrip.PixelStrip(board.NEOPIXEL0, width=32, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 strip.clear()
 TIME = 0.200
 
@@ -23,12 +24,12 @@ def blink(n, strip=None):
         if strip:
             strip[0] = AMETHYST
             strip.show()
-        sleep(0.3)
+        sleep(TIME*2)
         led.value = False
         if strip:
             strip.clear()
             strip.show()
-        sleep(0.3)
+        sleep(TIME*2)
 
 def main():
     while True:
@@ -74,5 +75,5 @@ def main():
                 sleep(TIME/4)
         sleep(0.500)
 
-blink(2, strip)
+blink(4, strip)
 main()

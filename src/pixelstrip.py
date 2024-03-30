@@ -41,8 +41,9 @@ class PixelStrip():
         self.width = n
         self.height = 1
         self.offset = offset
+        nn = n
         if width is not None and height is not None:
-            n = width * height
+            nn = width * height
             self.width = width
             self.height = height
         if options is not None:
@@ -55,7 +56,7 @@ class PixelStrip():
         self.font = None
         self.npxl = neopixel.NeoPixel(
             pin,
-            n,
+            nn + offset,
             brightness=brightness,
             auto_write=auto_write,
             bpp=bpp,
@@ -66,17 +67,18 @@ class PixelStrip():
         self.npxl.show()
 
     def fill(self, color):
-        self.npxl.fill(color)
-
-    def _setitem(self, index, color):
-        self.npxl[index] = color
+        if self.offset == 0:
+            self.npxl.fill(color)
+        else:
+            for p in range(self.__len__()):
+                self[p] = color
 
     @property
     def n(self):
-        return len(self.npxl)
+        return len(self.npxl) - self.offset
 
     def __len__(self):
-        return len(self.npxl)
+        return len(self.npxl) - self.offset
 
     def draw(self):
         """
@@ -101,12 +103,22 @@ class PixelStrip():
         """
         Turn all pixels off.
         """
-        self.fill(self.CLEAR)
+        self.npxl.fill(self.CLEAR)
         self.show()
 
     def __getitem__(self, index):
-        nn = index.self.offset
+        nn = index
         if nn >=0 and nn < len(self):
+            return self.npxl[nn + self.offset]
+        else:
+            return None
+        
+    def __getitem__(self, index):
+        return self._getitem(index)
+    
+    def _getitem(self, index):
+        nn = index + self.offset
+        if nn >=0 and nn < len(self.npxl):
             return self.npxl[nn]
         else:
             return None
@@ -116,7 +128,6 @@ class PixelStrip():
             nn = self._translate_pixel(index[0], index[1])
         else:
             nn = index
-        nn = nn + self.offset
         if self.wrap:
             while nn < 0:
                 nn += len(self)
@@ -124,6 +135,12 @@ class PixelStrip():
                 nn -= len(self)
         if nn >=0 and nn < len(self):
             self._setitem(nn, color)
+
+
+    def _setitem(self, index, color):
+        nn = index + self.offset
+        if nn >=0 and nn < len(self.npxl):
+            self.npxl[nn] = color
 
     def _translate_pixel(self, x, y):
         xx = x
