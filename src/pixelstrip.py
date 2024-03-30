@@ -1,4 +1,4 @@
-# Copyright (c) 2023, Keith Rieck
+# Copyright (c) 2024, Keith Rieck
 # All rights reserved.
 
 import time
@@ -34,12 +34,13 @@ class PixelStrip():
     """
 
     def __init__(
-        self, pin, n=8, width=None, height=None, brightness=1.0, options=None, auto_write=False, bpp=4,  pixel_order=None
+        self, pin, n=8, width=None, height=None, brightness=1.0, options=None, offset=0, auto_write=False, bpp=4,  pixel_order=None
     ):
         self._options = {MATRIX_PROGRESSIVE,
                          MATRIX_ROW_MAJOR, MATRIX_TOP, MATRIX_LEFT}
         self.width = n
         self.height = 1
+        self.offset = offset
         if width is not None and height is not None:
             n = width * height
             self.width = width
@@ -104,19 +105,25 @@ class PixelStrip():
         self.show()
 
     def __getitem__(self, index):
-        return self.npxl[index]
+        nn = index.self.offset
+        if nn >=0 and nn < len(self):
+            return self.npxl[nn]
+        else:
+            return None
 
     def __setitem__(self, index, color):
         if type(index) is tuple:
             nn = self._translate_pixel(index[0], index[1])
         else:
             nn = index
+        nn = nn + self.offset
         if self.wrap:
             while nn < 0:
                 nn += len(self)
             while nn >= len(self):
                 nn -= len(self)
-        self._setitem(nn, color)
+        if nn >=0 and nn < len(self):
+            self._setitem(nn, color)
 
     def _translate_pixel(self, x, y):
         xx = x

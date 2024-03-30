@@ -128,6 +128,14 @@ If `auto_write` is set to `True`, then changes are written automatically, withou
 It is recommended that you leave this value as `False`.  It will be more efficient to push all changes out at the same time with `strip.show()`.
 
 
+### offset
+
+```python
+strip.offset    # number of pixel to move the animation forward
+```
+
+Moves all pixel assignments and animations forward a number of pixels.  This applies if one or more of the pixels is not available or visible.
+
 ### wrap
 
 ```python
