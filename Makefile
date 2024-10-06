@@ -1,6 +1,6 @@
 # Compile Python files into CircuitPython MPY files
 
-MPY_CROSS = $(HOME)/Documents/bin/mpy-cross-macos-11-8.0.5-x64
+MPY_CROSS = $(HOME)/Documents/bin/mpy-cross-macos-11-9.0.5-x64
 
 build: lib lib/pixelstrip.mpy lib/colors.mpy lib/i2cp.mpy lib/bmp.mpy
 
