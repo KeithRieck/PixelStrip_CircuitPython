@@ -2,7 +2,7 @@
 
 PixelStrip is a [CircuitPython](https://circuitpython.org/) module for controlling WS2812 RGB LEDs on the [Adafruit Feather RP2040](https://www.adafruit.com/product/4884).  These LEDs are also known as  [NeoPixels](https://learn.adafruit.com/adafruit-neopixel-uberguide). The PixelStrip library allows you to add Animations to the strip.  Multiple strips can have separate animations that run in parallel.
 
-Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use `board.D12` for digital input.
+Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use `board.D12` for digital input. The red power wire usually connects to a pin labeled "VCC", the black ground wire connects to a pin named "GND", and the signal wire connects to "IN".
 
 ![pixelstrip_setup](./img/pixelstrip_setup_bb_feather.png)
 
@@ -76,7 +76,7 @@ while True:
 
 PixelStrip is a [CircuitPython](https://circuitpython.org/) module for controlling WS2812 RGB LEDs microcontroller boards, including the [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/).  These LEDs are also known as  [NeoPixels](https://learn.adafruit.com/adafruit-neopixel-uberguide). The PixelStrip library allows you to add Animations to the strip.  Multiple strips can have separate animations that run in parallel.
 
-Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use `board.GP15` for digital input.
+Wire up your Neopixels (WS2812B LEDs) to power, ground, and digital input. In the following example we will use `board.GP15` for digital input. The red power wire usually connects to a pin labeled "VCC", the black ground wire connects to a pin named "GND", and the digital input wire connects to "IN".
 
 ![pixelstrip_setup](./img/pixelstrip_setup_pico.png)
 
