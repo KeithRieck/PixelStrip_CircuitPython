@@ -48,9 +48,9 @@ public class LightsSubsystem extends SubsystemBase {
    */
   protected void clearAllAnimations() {
     for (int s = 0; s < MAX_STRIPS; s++) {
-      Integer b = Integer.valueOf(((s << 4) & 0xF0) | (MAX_ANIMATIONS & 0x0F));
+      Integer b = Integer.valueOf(((s << 4) & 0xE0) | (MAX_ANIMATIONS & 0x1F));
       nextAnimation[s] = b.byteValue();
-      currentAnimation[s] = (byte) 0;
+      currentAnimation[s] = (byte) MAX_ANIMATIONS;
     }
   }
 
