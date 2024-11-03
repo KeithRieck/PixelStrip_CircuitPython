@@ -39,10 +39,20 @@ class MyAnimation(pixelstrip.Animation):
 
 ## Properties
 
+### param
+
+```python
+anim.param = 'Hello world'
+```
+
+The `param` property is an optional parameter that can influence the `Animation`.
+For instance, it might be a string to display on a matrix.  It could be a number of pixels to display or an 
+indicator of the color to diaplay.
+
 ### timeout
 
 ```python
-self.timeout = 0.5   # Nmber of seconds
+anim.timeout = 0.5   # Nmber of seconds
 ```
 Setting the `timeout` property to a number of seconds means that the `Animation` will be timed out that many
 seconds in the future.  Setting `timeout` to `None` clears the timeout.

@@ -282,6 +282,7 @@ class Animation:
     """
 
     def __init__(self, name=None):
+        self._param = None
         self._timeout = None
         self._name = name
 
@@ -306,6 +307,10 @@ class Animation:
         The delta_time is the number of seconds since the last draw call.
         """
         pass
+
+    @property
+    def param(self):
+        return self._param
 
     @property
     def timeout(self):
