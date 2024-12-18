@@ -12,7 +12,7 @@ Here's a simple matrix program:
 import pixelstrip
 import board
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 matrix.timeout = 0.0
 i = 0
 
@@ -32,7 +32,7 @@ import pixelstrip
 import board
 from colors import *
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 matrix.timeout = 0.0
 c = 0
 
@@ -57,7 +57,7 @@ import pixelstrip
 import board
 from colors import *
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
+matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 matrix.timeout = 0.0
 
 def draw_box(m, x, y, color):
@@ -106,7 +106,7 @@ class StripeAnimation(pixelstrip.Animation):
 
 if __name__ == "__main__":
     # Create a PixelStrip object connected to digital IO pin GP4
-    matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB)
+    matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 
     # Assign an instance of the new Animation into the strip
     matrix.animation = StripeAnimation()
