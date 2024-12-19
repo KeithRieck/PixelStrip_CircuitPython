@@ -2,8 +2,6 @@
 
 We can do a lot of impressive animations with strips of WS2812B LEDs.  We can also use the same software to control 2-dimensional matrixes of LEDs.  Matrices are more dramatic, although they are also more expensive and they consume more electrical current.
 
-![matrix_setup](./img/matrix_setup_bb.png)
-
 Wiring a matrix is the same as a pixel strip.  You'll need the same two support files loaded onto your microcontroller: `pixelstrip.py`, and `colors.py`.  When creating a Python object to represent the matrix, you'll specify `height` and `width` parameters. You may also need to an `option` parameter, depending on how the matrix is wired and how it is positioned.  Individual pixels are addrssed by row and column.
 
 Here's a simple matrix program:
@@ -12,7 +10,7 @@ Here's a simple matrix program:
 import pixelstrip
 import board
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
+matrix = pixelstrip.PixelStrip(board.GP16, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 matrix.timeout = 0.0
 i = 0
 
@@ -32,7 +30,7 @@ import pixelstrip
 import board
 from colors import *
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
+matrix = pixelstrip.PixelStrip(board.GP16, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 matrix.timeout = 0.0
 c = 0
 
@@ -57,7 +55,7 @@ import pixelstrip
 import board
 from colors import *
 
-matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
+matrix = pixelstrip.PixelStrip(board.GP16, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 matrix.timeout = 0.0
 
 def draw_box(m, x, y, color):
@@ -106,7 +104,7 @@ class StripeAnimation(pixelstrip.Animation):
 
 if __name__ == "__main__":
     # Create a PixelStrip object connected to digital IO pin GP4
-    matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
+    matrix = pixelstrip.PixelStrip(board.GP16, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
 
     # Assign an instance of the new Animation into the strip
     matrix.animation = StripeAnimation()
