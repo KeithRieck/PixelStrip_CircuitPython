@@ -1,5 +1,6 @@
 import board
 import pixelstrip
+from colors import *
 
 # This is a a minimal example of an Animation.
 # All Animations must define a draw().  It's also a good
@@ -24,8 +25,8 @@ class MyAnimation(pixelstrip.Animation):
 
 
 if __name__ == "__main__":
-    strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
-    strip_12.animation = MyAnimation()
+    strip_15 = pixelstrip.PixelStrip(board.GP15, 8, bpp=4, pixel_order=pixelstrip.GRB)
+    strip_15.animation = MyAnimation()
     while True:
-        strip_12.draw()
+        strip_15.draw()
 
