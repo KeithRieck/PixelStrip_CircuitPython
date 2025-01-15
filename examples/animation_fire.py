@@ -90,11 +90,11 @@ def blink(n, strip=None):
 
 
 if __name__ == "__main__":
-    strip_12 = pixelstrip.PixelStrip(board.D12, NUM_PIXELS, bpp=4, pixel_order=pixelstrip.GRB)
-    strip_12.animation = FireAnimation(cooling=70, sparking=30)
-    blink(3, strip=strip_12)
+    strip_gp15 = pixelstrip.PixelStrip(board.GP15, NUM_PIXELS, bpp=4, pixel_order=pixelstrip.GRB)
+    strip_gp15.animation = FireAnimation(cooling=70, sparking=30)
+    blink(3, strip=strip_gp15)
     while True:
-        strip_12.draw()
+        strip_gp15.draw()
         sleep(0.02)
         
 

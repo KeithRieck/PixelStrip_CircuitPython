@@ -25,8 +25,8 @@ class MyAnimation(pixelstrip.Animation):
 
 
 if __name__ == "__main__":
-    strip_15 = pixelstrip.PixelStrip(board.GP15, 8, bpp=4, pixel_order=pixelstrip.GRB)
-    strip_15.animation = MyAnimation()
+    strip_gp15 = pixelstrip.PixelStrip(board.GP15, 8, bpp=4, pixel_order=pixelstrip.GRB)
+    strip_gp15.animation = MyAnimation()
     while True:
-        strip_15.draw()
+        strip_gp15.draw()
 

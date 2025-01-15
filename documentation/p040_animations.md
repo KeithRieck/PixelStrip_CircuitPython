@@ -31,7 +31,7 @@ class BlinkAnimation(Animation):
 
 if __name__ == "__main__":
     # Create a PixelStrip object connected to digital IO pin GP4
-    strip = PixelStrip(board.D12, 24, bpp=4, pixel_order=GRB)
+    strip = PixelStrip(board.GP15, 24, bpp=4, pixel_order=GRB)
 
     # Assign an instance of the new Animation into the strip
     strip.animation = BlinkAnimation()
@@ -67,7 +67,7 @@ class SparkAnimation(Animation):
             self.timeout = 0.3
 
 if __name__ == "__main__":
-    strip = PixelStrip(board.D12, 24, bpp=4, pixel_order=GRB)
+    strip = PixelStrip(board.GP15, 24, bpp=4, pixel_order=GRB)
     strip.wrap = True
     strip.animation = SparkAnimation()
     while True:

@@ -1,7 +1,7 @@
 import board
 import pixelstrip
 
-strip = pixelstrip.PixelStrip(board.D12, 8)
+strip = pixelstrip.PixelStrip(board.GP15, 8)
 strip.timeout = 0.0
 
 cycle_time = 2.0
