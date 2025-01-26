@@ -27,8 +27,8 @@ class LadderAnimation(pixelstrip.Animation):
 
 
 if __name__ == "__main__":
-    strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
-    strip_12.animation = LadderAnimation()
+    strip_gp15 = pixelstrip.PixelStrip(board.GP15, 8, bpp=4, pixel_order=pixelstrip.GRB)
+    strip_gp15.animation = LadderAnimation()
     while True:
-        strip_12.draw()
+        strip_gp15.draw()
 

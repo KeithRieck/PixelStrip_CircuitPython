@@ -3,7 +3,7 @@ from colors import *
 import pixelstrip
 import board
 
-pixel = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB, auto_write=True)
+pixel = pixelstrip.PixelStrip(board.GP15, 8, bpp=4, pixel_order=pixelstrip.GRB, auto_write=True)
 
 pixel.brightness = 0.3
 pixel.clear()

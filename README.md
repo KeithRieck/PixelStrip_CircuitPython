@@ -77,8 +77,8 @@ from time import sleep
 import board
 import pixelstrip
 
-# Create a PixelStrip object connected to digital IO pin 12
-strip = pixelstrip.PixelStrip(board.D12, 8, auto_write=True)
+# Create a PixelStrip object connected to digital IO pin GP15
+strip = pixelstrip.PixelStrip(board.GP15, 8, auto_write=True)
 
 # Assign color values to individual LEDs
 while True:
@@ -116,15 +116,15 @@ class BlinkAnimation(pixelstrip.Animation):
                 strip[0] = (128, 0, 0, 0)
             strip.show()
 
-# Create a PixelStrip object connected to digital IO pin 12
-strip_12 = pixelstrip.PixelStrip(board.D12, 8, bpp=4, pixel_order=pixelstrip.GRB)
+# Create a PixelStrip object connected to digital IO pin GP15
+strip = pixelstrip.PixelStrip(board.GP15, 8, bpp=4, pixel_order=pixelstrip.GRB)
 
 # Assign an instance of the new Animation into the strip
-strip_12.animation = BlinkAnimation()
+strip.animation = BlinkAnimation()
 
 # Repeatedly draw the strip, causing the Animation to run
 while True:
-    strip_12.draw()
+    strip.draw()
 ```
 
 > Note that the `PixelStrip` constructor contains special arguments for `bpp` and `pixel_order`.
