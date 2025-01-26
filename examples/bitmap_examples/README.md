@@ -4,7 +4,7 @@ The `PixelStrip` can display graphics files using the `BmpFile` class.  At this 
 
 The BMP files must be copied onto the microcontroller:
 
-![Files](../../documentation/img/ciruitPython_files_TEXT.png)
+![Files](../../documentation/img/ciruitPython_files_BITMAP.png)
 
 The `BitmapAnimation` class will cycle through a list of files.  By default, images will switch once a second.  You can change the speed by modifying `cycle_time` in the constructor.
 
