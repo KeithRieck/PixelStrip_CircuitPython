@@ -39,7 +39,7 @@ class BmpFile:
             # Pixel Data
             fp.seek(self.bfOffBits)
             self.values = []
-            for i in range(self.width * self.height):
+            for _ in range(self.width * self.height):
                 b = struct.unpack('B', fp.read(1))[0]
                 g = struct.unpack('B', fp.read(1))[0]
                 r = struct.unpack('B', fp.read(1))[0]

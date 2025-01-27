@@ -19,12 +19,13 @@ class FireAnimation(pixelstrip.Animation):
     """
     See https://github.com/davepl/DavesGarageLEDSeries/blob/master/LED%20Episode%2010/include/fire.h
     """
-    def __init__(self, cooling=60, sparking=50, sparks=3, sparkHeight=4):
+    def __init__(self, cooling=60, sparking=50, sparks=3, sparkheight=4):
         pixelstrip.Animation.__init__(self)
         self.cooling = cooling
         self.sparking = sparking
         self.sparks = sparks
-        self.sparkHeight = sparkHeight
+        self.sparkHeight = sparkheight
+        self.heat = None
 
     def reset(self, strip):
         self.heat = [0] * strip.n
@@ -34,9 +35,9 @@ class FireAnimation(pixelstrip.Animation):
         size = strip.n
         
         # First cool each cell by a little bit
-        coolRange = floor(((self.cooling * 10) / size) + 2)
+        cool_range = floor(((self.cooling * 10) / size) + 2)
         for p in range(size):
-            self.heat[p] = max(0, floor(self.heat[p] - randint(0, coolRange)))
+            self.heat[p] = max(0, floor(self.heat[p] - randint(0, cool_range)))
             
         # Next drift heat up and diffuse it a little bit
         for p in range(3, size):
@@ -52,11 +53,11 @@ class FireAnimation(pixelstrip.Animation):
                 self.heat[p] = (self.heat[p] + randint(160, 255)) % 256
 
         for p in range(size):
-            strip[p] = heatColor(self.heat[p])
+            strip[p] = heat_color(self.heat[p])
 
         strip.show()
         
-def heatColor(temperature):
+def heat_color(temperature):
     """Translate a temperature number (0-255) into a color representing its heat"""
     t192 = scale8_video(temperature, 192)
     heatramp = (t192 & 0x3F) << 2

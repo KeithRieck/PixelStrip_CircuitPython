@@ -28,7 +28,7 @@ MATRIX_PROGRESSIVE = 0x40   # Same pixel order across each line
 MATRIX_ZIGZAG = 0x80        # Pixel order reverses between lines
 
 
-class PixelStrip():
+class PixelStrip:
     """
     Extends NeoPixel, but supporting Animations.
     """
@@ -105,20 +105,13 @@ class PixelStrip():
         """
         self.npxl.fill(self.CLEAR)
         self.show()
-
-    def __getitem__(self, index):
-        nn = index
-        if nn >=0 and nn < len(self):
-            return self.npxl[nn + self.offset]
-        else:
-            return None
         
     def __getitem__(self, index):
         return self._getitem(index)
     
     def _getitem(self, index):
         nn = index + self.offset
-        if nn >=0 and nn < len(self.npxl):
+        if nn >= 0 and nn < len(self.npxl):
             return self.npxl[nn]
         else:
             return None
@@ -133,7 +126,7 @@ class PixelStrip():
                 nn += len(self)
             while nn >= len(self):
                 nn -= len(self)
-        if nn >=0 and nn < len(self):
+        if nn >= 0 and nn < len(self):
             self._setitem(nn, color)
 
 
