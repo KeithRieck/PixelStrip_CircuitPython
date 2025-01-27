@@ -2,7 +2,8 @@ from time import sleep
 import board
 import neopixel
 
-pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
+pixel = neopixel.NeoPixel(board.GP15, 1)
+# pixel = neopixel.NeoPixel(board.NEOPIXEL, 1)
 
 pixel.brightness = 0.3
 

@@ -1,4 +1,4 @@
-# Copyright (c) 2023, Keith Rieck
+# Copyright (c) 2025, Keith Rieck
 # All rights reserved.
 
 ALICEBLUE = (0xF0, 0xF8, 0xFF, 0x00)
