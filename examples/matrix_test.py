@@ -8,9 +8,6 @@ import digitalio
 # If set correctly, the origin pixel should be in the upper left 
 # corner and BLUE/WHITE pixels should go left-to-right / top-to-bottom.
 
-strip_gp15 = pixelstrip.PixelStrip(board.GP15, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT})
-#strip_gp15 = pixelstrip.PixelStrip(board.NEOPIXEL0, width=32, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
-strip_gp15.clear()
 TIME = 0.200
 
 def blink(n, strip=None):
@@ -31,7 +28,7 @@ def blink(n, strip=None):
             strip.show()
         sleep(TIME*2)
 
-def main():
+def main(strip=None):
     while True:
         # Blink the zero pixel as RED
         for i in range(0, 6):
@@ -75,5 +72,10 @@ def main():
                 sleep(TIME/4)
         sleep(0.500)
 
-blink(4, strip)
-main()
+
+if __name__ == "__main__":
+    strip_gp15 = pixelstrip.PixelStrip(board.GP15, width=8, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT})
+    #strip_gp15 = pixelstrip.PixelStrip(board.GP15, width=32, height=8, bpp=4, pixel_order=pixelstrip.GRB, options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT, pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
+    strip_gp15.clear()
+    blink(4, strip_gp15)
+    main(strip_gp15)
