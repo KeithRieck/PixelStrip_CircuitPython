@@ -33,7 +33,6 @@ For the Pico program, files should be installed onto the Pico.  First copy the f
 
 ![Files](img/i2c_test_files.png)
 
-
 ## Arduino Hardware Setup
 
 Connect the Arduino's SDA and SCL pins to corresponding pins on the Pico.  For this example, we are configuring the Pico's GP6 and GP7 pins for I2C.  Also connect ground wires between the two boards.  Ignore the power pin.

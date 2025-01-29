@@ -26,15 +26,20 @@ led.direction = digitalio.Direction.OUTPUT
 
 i2c = I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS])
 
-# Receive one byte through I2C, if available 
+# Receive a message through I2C, if available.  The first byte will
+# contain the strip number and animation number, packed into the single
+# byte.  If there is a param associated with this message, it is 
+# concatenated after the first byte.
 def receive_message():
     global i2c
     message = i2c.request()
     if message:
-        b = message.read(n=1)[0]
+        message_bytes = message.read()
+        b = message_bytes[0]
         strip_num = int((b & 0xE0) >> 5)
         anim_num = int(b & 0x1F)
-        return (strip_num, anim_num)
+        param = None if len(message_bytes) == 1 else message_bytes[1:].decode
+        return (strip_num, anim_num, param)
     else:
         return None
 
@@ -46,11 +51,13 @@ def main():
         for s in strip:
             s.draw()
         message = receive_message()
-        if message:
+        if message is not None:
             strip_num = message[0]
             anim_num = message[1]
             if strip_num < len(strip) and anim_num < len(animation):
                 strip[strip_num].animation = animation[anim_num]
+                if message[2] is not None or animation[anim_num].param is not None:
+                    animation[anim_num].param = message[2]
             elif strip_num < len(strip):
                 strip[strip_num].animation = None
             last_msg_time = current_time()
