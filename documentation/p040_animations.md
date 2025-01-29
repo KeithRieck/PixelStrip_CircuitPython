@@ -30,7 +30,7 @@ class BlinkAnimation(Animation):
             self.timeout = 1.0
 
 if __name__ == "__main__":
-    # Create a PixelStrip object connected to digital IO pin GP4
+    # Create a PixelStrip object connected to digital IO pin GP15
     strip = PixelStrip(board.GP15, 24, bpp=4, pixel_order=GRB)
 
     # Assign an instance of the new Animation into the strip

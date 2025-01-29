@@ -2,30 +2,28 @@ import board
 import pixelstrip
 from colors import *
 
-# This Animation displays a text message scrolling across a 32x8 matrix.
-
-
-class ScrollAnimation(pixelstrip.Animation):
-    def __init__(self, message, color=YELLOW, cycle_time=0.5):
+class VoltageAnimation(pixelstrip.Animation):
+    """
+    Display's the robot's current voltage on a matrix.
+    Voltage is received into the 'param' property.
+    """
+    def __init__(self, cycle_time=0.25):
         pixelstrip.Animation.__init__(self)
-        self.color = color
         self.cycle_time = cycle_time
-        self.message = message
-        self.xx = 0
 
     def reset(self, strip):
-        self.xx = 0
-        strip.clear()
-        strip.show()
         self.timeout = self.cycle_time
+        strip.clear()
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
-            self.timeout = self.cycle_time
             strip.clear()
-            p = strip.draw_text(self.message, x=self.xx, color=self.color)
-            self.xx = self.xx - 1 if p > 0 else 0
+            strip.draw_text('V:', color=GRAY)
+            voltage_val = float(self.param)
+            cc = GREEN if voltage_val >= 11.5 else RED
+            strip.draw_text(str(voltage_val), x=7, color=cc)
             strip.show()
+            self.timeout = self.cycle_time
 
 
 if __name__ == "__main__":
@@ -35,9 +33,9 @@ if __name__ == "__main__":
                                             pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
     matrix.brightness = 0.3
     matrix.load_font("fonts/proggy_tiny_12pt.bdf")
-    matrix.animation = ScrollAnimation(
-        "The quick brown fox jumped over the lazy dog.", 
-        cycle_time=0.1, color=GREEN)
+    a = VoltageAnimation()
+    a.param = '0.0'
+    matrix.animation = a
+    
     while True:
         matrix.draw()
-

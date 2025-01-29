@@ -2,10 +2,10 @@ import board
 import pixelstrip
 from colors import *
 
-# This Animation displays a series of texts.
-
-
 class StatsAnimation(pixelstrip.Animation):
+    """
+    Displays a series of texts.
+    """
     def __init__(self, messages, color=WHITE, cycle_time=2.0):
         pixelstrip.Animation.__init__(self)
         self.color = color
@@ -46,7 +46,7 @@ class StatsAnimation(pixelstrip.Animation):
 
 
 if __name__ == "__main__":
-    matrix = pixelstrip.PixelStrip(board.GP4, width=32, height=8,
+    matrix = pixelstrip.PixelStrip(board.GP15, width=32, height=8,
                                    bpp=4, pixel_order=pixelstrip.GRB,
                                    options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT,
                                             pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})

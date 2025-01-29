@@ -10,7 +10,7 @@ import board
 
 class FontTester(PixelStrip):
     def __init__(self):
-        PixelStrip.__init__(self, board.GP12)
+        PixelStrip.__init__(self, board.GP15)
         self.matrix = None
         self.num_rows = 1
         self.num_cols = 1

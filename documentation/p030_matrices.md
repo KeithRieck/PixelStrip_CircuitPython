@@ -111,7 +111,7 @@ class StripeAnimation(pixelstrip.Animation):
 
 
 if __name__ == "__main__":
-    # Create a PixelStrip object connected to digital IO pin GP4
+    # Create a PixelStrip object connected to digital IO pin D12
     matrix = pixelstrip.PixelStrip(board.D12, width=8, height=8, bpp=4, 
                                    pixel_order=pixelstrip.GRB, 
                                    options={pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})

@@ -6,7 +6,7 @@ import board
 # This is an absolutly minimal program to demonstrate text displayed
 # on a 32x8 matrix.
 
-matrix = pixelstrip.PixelStrip(board.GP4, width=32, height=8, auto_write=True,
+matrix = pixelstrip.PixelStrip(board.GP15, width=32, height=8, auto_write=True,
                                bpp=4, pixel_order=pixelstrip.GRB,
                                options={pixelstrip.MATRIX_TOP, pixelstrip.MATRIX_LEFT,
                                         pixelstrip.MATRIX_COLUMN_MAJOR, pixelstrip.MATRIX_ZIGZAG})
