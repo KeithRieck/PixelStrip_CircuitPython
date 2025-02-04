@@ -12,6 +12,8 @@ A similar example can be created allowing two CircuitPython boards to talk to ea
 
 ![Wire](img/wire_example_bb.png)
 
+The yellow clock wire (SCL) should be connected to GP7, the 10th pin from the top.  The blue data wire (SDA) should be connected to GP6, which is the 9th pin counting from the USB plug.
+
 # I2C Animation Test
 
 This project demonstrates that NeoPixel strips connected to a microcontroller can have their animations changed based on I2C communication from an Arduino.  The project has two parts:
@@ -29,7 +31,7 @@ For the Pico program, files should be installed onto the Pico.  First copy the f
 * `neopixel.mpy` and `adafruit_pixelbuf.mpy` taken from the CircuitPython libraries
 * `pixelstrip.mpy` and `colors.mpy` taken from the PixelStrip repository
 * `main.py`, copied from `i2c_animations.py`
-* `animation_pulse.py` copied from the PixelStrip examples.  Comment out the "main" routine in the last 8 lines of this file.
+* `animation_pulse.py` copied from the PixelStrip examples.  
 
 ![Files](img/i2c_test_files.png)
 
@@ -76,4 +78,7 @@ Tools > Board > Boards Manager...
 
 Search for "Apollo" and then install the "SparkFun Apollo3 Boards" package.
 
+## See Also:
+* [I2CTarget class](https://docs.circuitpython.org/en/latest/shared-bindings/i2ctarget/index.html)
+* [CircuitPython I2C and SPI Under The Hood](https://learn.adafruit.com/circuitpython-basics-i2c-and-spi)
 

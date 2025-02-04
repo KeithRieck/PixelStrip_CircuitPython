@@ -22,7 +22,7 @@ animation = [
 # List of PixelStrips
 strip = [
     PixelStrip(board.GP15, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
-    PixelStrip(board.GP16, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
+    PixelStrip(board.GP14, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
 ]
 
 # The built-in LED will turn on for half a second after every message
