@@ -6,14 +6,12 @@ from pixelstrip import PixelStrip, current_time
 from colors import *
 
 from animation_pulse import PulseAnimation
-from animation_param_bargraph import BarGraphAnimation
 
 I2C_ADDRESS = 0x41
 BRIGHTNESS = 0.5
 
 # List of Animations
 animation = [
-    BarGraphAnimation(),
     PulseAnimation(),
     PulseAnimation([(0, 136, 0, 0), (64, 64, 0, 0)]),
     PulseAnimation([(0, 0, 136, 0), (0, 64, 64, 0)]),
@@ -21,8 +19,8 @@ animation = [
 
 # List of PixelStrips
 strip = [
-    PixelStrip(board.GP15, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
-    PixelStrip(board.GP14, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
+    PixelStrip(board.GP8, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
+    PixelStrip(board.GP5, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS)
 ]
 
 # The built-in LED will turn on for half a second after every message
@@ -53,27 +51,22 @@ def main():
     global strip, led, i2c
     blink(3)
     last_msg_time = 0.0
-    try:
-        i2c = I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS])
-        while True:
-            for s in strip:
-                s.draw()
-            message = receive_message()
-            if message is not None:
-                strip_num = message[0]
-                anim_num = message[1]
-                if strip_num < len(strip) and anim_num < len(animation):
-                    strip[strip_num].animation = animation[anim_num]
-                    if message[2] is not None or animation[anim_num].param is not None:
-                        animation[anim_num].param = message[2]
-                elif strip_num < len(strip):
-                    strip[strip_num].animation = None
-                last_msg_time = current_time()
-            led.value = (current_time() < last_msg_time + 0.5)
-    finally:
-        if i2c is not None:
-            i2c.unlock()
-            i2c = None
+    i2c = I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS])
+    while True:
+        for s in strip:
+            s.draw()
+        message = receive_message()
+        if message is not None:
+            strip_num = message[0]
+            anim_num = message[1]
+            if strip_num < len(strip) and anim_num < len(animation):
+                strip[strip_num].animation = animation[anim_num]
+                if message[2] is not None or animation[anim_num].param is not None:
+                    animation[anim_num].param = message[2]
+            elif strip_num < len(strip):
+                strip[strip_num].animation = None
+            last_msg_time = current_time()
+        led.value = (current_time() < last_msg_time + 0.5)
 
 def blink(n, color=BLUE, sleep_time=0.4): 
     """Blink lights to show that the program has loaded successfully"""

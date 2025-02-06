@@ -13,6 +13,7 @@ class PulseAnimation(pixelstrip.Animation):
         pixelstrip.Animation.__init__(self)
         self.color_list = color_list
         self.cycle_time = cycle_time
+        self.param = None
 
     def reset(self, strip):
         strip.clear()
