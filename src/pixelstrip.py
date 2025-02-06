@@ -304,6 +304,10 @@ class Animation:
     @property
     def param(self):
         return self._param
+    
+    @param.setter
+    def param(self, p):
+        self._param = p
 
     @property
     def timeout(self):
