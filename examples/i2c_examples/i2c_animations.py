@@ -41,8 +41,8 @@ def receive_message():
         b = message_bytes[0]
         strip_num = int((b & 0xE0) >> 5)
         anim_num = int(b & 0x1F)
-        param = None if len(message_bytes) == 1 else message_bytes[1:].decode
-        # print(f"received {(strip_num, anim_num, param)}")
+        param = None if len(message_bytes) == 1 else message_bytes[1:].decode('utf-8')
+        # print(f"received {len(message_bytes)} bytes      {(strip_num, anim_num, param)}")
         return (strip_num, anim_num, param)
     else:
         return None
