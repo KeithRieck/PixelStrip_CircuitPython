@@ -19,11 +19,11 @@ animation = [
 
 # List of PixelStrips
 strip = [
-    PixelStrip(board.GP8, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS),
-    PixelStrip(board.GP5, 8, bpp=4, pixel_order="RGB", brightness=BRIGHTNESS)
+    PixelStrip(board.GP8, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS),
+    PixelStrip(board.GP5, 8, bpp=4, pixel_order="GRB", brightness=BRIGHTNESS)
 ]
 
-# The built-in LED will turn on for half a second after every message
+# The built-in LED will turn on for half a second after every message 
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
 
@@ -42,16 +42,14 @@ def receive_message():
         strip_num = int((b & 0xE0) >> 5)
         anim_num = int(b & 0x1F)
         param = None if len(message_bytes) == 1 else message_bytes[1:].decode('utf-8')
-        # print(f"received {len(message_bytes)} bytes      {(strip_num, anim_num, param)}")
+        print(f"received {len(message_bytes)} bytes      {(strip_num, anim_num, param)}")
         return (strip_num, anim_num, param)
     else:
         return None
 
-def main(): 
-    global strip, led, i2c
-    blink(3)
+def main(i2c): 
+    global strip, led
     last_msg_time = 0.0
-    i2c = I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS])
     while True:
         for s in strip:
             s.draw()
@@ -70,19 +68,24 @@ def main():
 
 def blink(n, color=BLUE, sleep_time=0.4): 
     """Blink lights to show that the program has loaded successfully"""
-    global strip
+    global strip, led
     for s in strip:
         s.clear()
     for _ in range(n):
         for s in strip:
             s[0] = color
             s.show()
+            led.value = True
         sleep(sleep_time)
         for s in strip:
             s.clear()
             s.show()
+            led.value = False
         sleep(sleep_time)
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": 
+    blink(2)
+    with I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS]) as i2c:
+        blink(1, GREEN)
+        main(i2c) 
