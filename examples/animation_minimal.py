@@ -9,19 +9,25 @@ from colors import *
 # the Animation restarts.
 
 class MyAnimation(pixelstrip.Animation):
-    def __init__(self):
+    """
+    Write a description of this Animtion here.
+    """
+    def __init__(self, cycle_time=0.5)):
         pixelstrip.Animation.__init__(self)
+        self.cycle_time = cycle_time
         # variable setup
 
     def reset(self, strip):
-        # reset variables
-        # set timeout if needed
+        self.timeout = self.cycle_time
         strip.clear()
         strip.show()
+        # reset variables
 
     def draw(self, strip, delta_time):
+        if self.is_timed_out():
         # change pixel values
         strip.show()
+            self.timeout = self.cycle_time
 
 
 if __name__ == "__main__":
