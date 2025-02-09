@@ -25,8 +25,8 @@ class MyAnimation(pixelstrip.Animation):
 
     def draw(self, strip, delta_time):
         if self.is_timed_out():
-        # change pixel values
-        strip.show()
+            # change pixel values
+            strip.show()
             self.timeout = self.cycle_time
 
 
