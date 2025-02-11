@@ -29,25 +29,32 @@ led.direction = digitalio.Direction.OUTPUT
 
 i2c = None
 
-# Receive a message through I2C, if available.  The first byte will
-# contain the strip number and animation number, packed into the single
-# byte.  If there is a param associated with this message, it is 
-# concatenated after the first byte.
+
 def receive_message():
+    """
+    Receive a message through I2C, if available.  The first byte will
+    contain the strip number and animation number, packed into the single
+    byte.  If there is a param associated with this message, it is 
+    concatenated after the first byte.
+    """
     global i2c
     message = i2c.request()
-    if message:
+    if not message:
+        return None
+    with message:
         message_bytes = message.read()
         b = message_bytes[0]
         strip_num = int((b & 0xE0) >> 5)
         anim_num = int(b & 0x1F)
-        param = None if len(message_bytes) == 1 else message_bytes[1:].decode('utf-8')
+        param = None 
+        if len(message_bytes) > 1:
+            param = message_bytes[1:].decode('utf-8')
         print(f"received {len(message_bytes)} bytes      {(strip_num, anim_num, param)}")
         return (strip_num, anim_num, param)
-    else:
-        return None
+
 
 def main(i2c): 
+    "Main program loop, for reading messages and changing Animations."
     global strip, led
     last_msg_time = 0.0
     while True:
@@ -66,8 +73,9 @@ def main(i2c):
             last_msg_time = current_time()
         led.value = (current_time() < last_msg_time + 0.5)
 
+
 def blink(n, color=BLUE, sleep_time=0.4): 
-    """Blink lights to show that the program has loaded successfully"""
+    "Blink lights to show that the program is progressing."
     global strip, led
     for s in strip:
         s.clear()
@@ -85,7 +93,7 @@ def blink(n, color=BLUE, sleep_time=0.4):
 
 
 if __name__ == "__main__": 
-    blink(2)
+    blink(2, BLUE)
     with I2CTarget(scl=board.GP7, sda=board.GP6, addresses=[I2C_ADDRESS]) as i2c:
         blink(1, GREEN)
         main(i2c) 

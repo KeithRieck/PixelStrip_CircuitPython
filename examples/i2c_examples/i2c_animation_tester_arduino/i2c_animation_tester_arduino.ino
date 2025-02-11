@@ -33,9 +33,9 @@ void loop()
   byte b = ((strip_number << 5) & 0xE0) + (anim_number & 0x1F);
   Wire.beginTransmission(I2C_ADDRESS);
   if (anim_number == 0) {
-    char message[4] = "x25";
+    char message[5] = "x256";
     message[0] = b;
-    Wire.write(message);
+    Wire.write(message, 4);
     Serial.println("message");
   } else {
     Wire.write(b);
