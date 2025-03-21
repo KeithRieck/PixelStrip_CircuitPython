@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.*;
 
 /**
  * This robot program tests that animations on a Raspberry Pi Pico can be

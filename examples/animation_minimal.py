@@ -10,7 +10,7 @@ from colors import *
 
 class MyAnimation(pixelstrip.Animation):
     """
-    Write a description of this Animtion here.
+    Write a description of this Animation here.
     """
     def __init__(self, cycle_time=0.5)):
         pixelstrip.Animation.__init__(self)
