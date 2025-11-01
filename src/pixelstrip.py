@@ -54,7 +54,7 @@ class PixelStrip:
         self.wrap = False
         self.CLEAR = (0, 0, 0, 0) if bpp == 4 else (0, 0, 0)
         self.font = None
-        self.npxl = neopixel.NeoPixel(
+        self._neopixels = neopixel.NeoPixel(
             pin,
             nn + offset,
             brightness=brightness,
@@ -64,21 +64,21 @@ class PixelStrip:
         )
 
     def show(self):
-        self.npxl.show()
+        self._neopixels.show()
 
     def fill(self, color):
         if self.offset == 0:
-            self.npxl.fill(color)
+            self._neopixels.fill(color)
         else:
             for p in range(self.__len__()):
                 self[p] = color
 
     @property
     def n(self):
-        return len(self.npxl) - self.offset
+        return len(self._neopixels) - self.offset
 
     def __len__(self):
-        return len(self.npxl) - self.offset
+        return len(self._neopixels) - self.offset
 
     def draw(self):
         """
@@ -103,18 +103,17 @@ class PixelStrip:
         """
         Turn all pixels off.
         """
-        self.npxl.fill(self.CLEAR)
+        self._neopixels.fill(self.CLEAR)
         self.show()
         
     def __getitem__(self, index):
         return self._getitem(index)
     
-    def _getitem(self, index):
-        nn = index + self.offset
-        if nn >= 0 and nn < len(self.npxl):
-            return self.npxl[nn]
-        else:
-            return None
+def _getitem(self, index):
+    nn = index + self.offset
+    if 0 <= nn < len(self._neopixels):
+        return self._neopixels[nn]
+    raise IndexError(f"Pixel index {nn} out of range.")
 
     def __setitem__(self, index, color):
         if type(index) is tuple:
@@ -132,10 +131,15 @@ class PixelStrip:
 
     def _setitem(self, index, color):
         nn = index + self.offset
-        if nn >=0 and nn < len(self.npxl):
-            self.npxl[nn] = color
+        if nn >=0 and nn < len(self._neopixels):
+            self._neopixels[nn] = color
+        else:
+            raise IndexError(f"Pixel index {nn} out of range.")
 
     def _translate_pixel(self, x, y):
+        """
+        Translates the x and y coordinates into a linear pixel number.
+        """
         xx = x
         yy = y
 
@@ -191,10 +195,7 @@ class PixelStrip:
         """
         Determine if the timeout has been reached.
         """
-        if self._timeout is None:
-            return False
-        else:
-            return current_time() >= self._timeout
+        return self._timeout is not None and current_time() >= self._timeout
 
     def load_font(self, font_file):
         """
@@ -309,10 +310,6 @@ class Animation:
     def param(self, p):
         self._param = p
 
-    @param.setter
-    def param(self, p):
-        self._param = p
-
     @property
     def timeout(self):
         return self._timeout
@@ -332,7 +329,4 @@ class Animation:
         """
         Determine if the timeout has been reached.
         """
-        if self._timeout is None:
-            return False
-        else:
-            return current_time() >= self._timeout
+        return self._timeout is not None and current_time() >= self._timeout
