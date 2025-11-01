@@ -109,11 +109,11 @@ class PixelStrip:
     def __getitem__(self, index):
         return self._getitem(index)
     
-def _getitem(self, index):
-    nn = index + self.offset
-    if 0 <= nn < len(self._neopixels):
-        return self._neopixels[nn]
-    raise IndexError(f"Pixel index {nn} out of range.")
+    def _getitem(self, index):
+        nn = index + self.offset
+        if 0 <= nn < len(self._neopixels):
+            return self._neopixels[nn]
+        raise IndexError(f"Pixel index {nn} out of range.")
 
     def __setitem__(self, index, color):
         if type(index) is tuple:
