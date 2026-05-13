@@ -72,6 +72,7 @@ class PixelStrip:
         else:
             for p in range(self.__len__()):
                 self[p] = color
+            self.show()
 
     @property
     def n(self):
@@ -182,7 +183,7 @@ class PixelStrip:
         Set or reset a timeout (in seconds) on this PixelStrip.
         Setting with None cancels the timeout.
         """
-        if t < 0 or t is None:
+        if t is None or t < 0:
             self._timeout = None
         else:
             self._timeout = current_time() + t
@@ -305,10 +306,6 @@ class Animation:
     def param(self):
         return self._param
     
-    @param.setter
-    def param(self, p):
-        self._param = p
-
     @param.setter
     def param(self, p):
         self._param = p
