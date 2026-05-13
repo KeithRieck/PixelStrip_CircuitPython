@@ -232,30 +232,26 @@ class PixelStrip:
                     xx += glyph.width + 1
         return pixels_changed
 
-    def draw_line(self, x1, y1, x2, y2, color=(0xFF, 0xFF, 0xFF, 0x00)):
-        pixels_changed = 0
-        if y1 == y2:
-            xx = x1 if x1 <= x2 else x2
-            ww = 1 + abs(x2 - x1)
-            for i in range(ww):
-                self.__setitem__((xx+i, y1), color)
-                pixels_changed = pixels_changed + 1
-        elif x1 == x2:
-            yy = y1 if y1 <= y2 else y2
-            hh = 1 + abs(y2 - y1)
-            for i in range(hh):
-                self.__setitem__((x1, yy+i), color)
-                pixels_changed = pixels_changed + 1
-        else:
-            xx = x1 if x1 <= x2 else x2
-            yy = y1 if y1 <= y2 else y2
-            ww = 1 + abs(x2 - x1)
-            hh = float(y2 - y1)
-            for i in range(ww):
-                j = int(i/hh)
-                self.__setitem__((xx+i, yy+j), color)
-                pixels_changed = pixels_changed + 1
-        return pixels_changed
+def draw_line(self, x1, y1, x2, y2, color=(0xFF, 0xFF, 0xFF, 0x00)):
+    pixels_changed = 0
+    dx = abs(x2 - x1)
+    dy = abs(y2 - y1)
+    sx = 1 if x1 < x2 else -1
+    sy = 1 if y1 < y2 else -1
+    err = dx - dy
+    while True:
+        self.__setitem__((x1, y1), color)
+        pixels_changed += 1
+        if x1 == x2 and y1 == y2:
+            break
+        e2 = 2 * err
+        if e2 > -dy:
+            err -= dy
+            x1 += sx
+        if e2 < dx:
+            err += dx
+            y1 += sy
+    return pixels_changed
 
     def draw_rect(self, x, y, w, h, fill=False, color=(0xFF, 0xFF, 0xFF, 0x00)):
         pixels_changed = 0
